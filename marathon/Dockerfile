@@ -1,5 +1,5 @@
 FROM ubuntu
-MAINTAINER Justin Plock <jplock@gmail.com>
+MAINTAINER Jordan Li <twistedogic@gmail.com>
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN apt-get update
