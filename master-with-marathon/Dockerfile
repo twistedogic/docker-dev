@@ -37,5 +37,5 @@ RUN cd /opt/marathon && mvn3 package
 
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 5050 22 2181 2888 3888
+EXPOSE 5050 22 2181 2888 3888 9000 8081 8082
 CMD ["/usr/bin/supervisord"]
