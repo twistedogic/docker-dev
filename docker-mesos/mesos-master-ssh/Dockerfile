@@ -22,7 +22,7 @@ true
 
 WORKDIR /tmp
 RUN \
-  apt-get install -y curl openjdk-6-jre-headless && \
+  apt-get install -y curl openjdk-7-jre-headless && \
   curl -O http://s3.amazonaws.com/downloads.mesosphere.io/master/ubuntu/12.04/mesos_0.18.0_amd64.deb && \
   dpkg --unpack mesos_0.18.0_amd64.deb && \
   apt-get install -f -y && \
