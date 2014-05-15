@@ -35,7 +35,18 @@ RUN curl -O http://s3.amazonaws.com/downloads.mesosphere.io/master/ubuntu/12.04/
 ADD . /opt/marathon
 RUN cd /opt/marathon && mvn3 package
 
+# install dependencies
+RUN apt-get install -y unzip
+
+# install consul
+RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_linux_amd64.zip -O /tmp/consul.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul.zip -d /tmp/
+RUN chmod +x /tmp/consul
+RUN mv /tmp/consul /usr/bin/consul
+
+# install consul-web-ui
+RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_web_ui.zip -O /tmp/consul-web-ui.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul-web-ui.zip -d /usr/local/consul-web-ui
+
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 5050 22 2181 2888 3888 9000 8081 8082
+EXPOSE 5050 22 2181 2888 3888 9000 8081 8082 8300 8500
 CMD ["/usr/bin/supervisord"]

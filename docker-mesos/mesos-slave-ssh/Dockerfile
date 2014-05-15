@@ -30,7 +30,17 @@ RUN \
   apt-get clean
 
 RUN apt-get install -y -q supervisor vim curl
+# install dependencies
+RUN apt-get install -y unzip
+
+# install consul
+RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_linux_amd64.zip -O /tmp/consul.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul.zip -d /tmp/
+RUN chmod +x /tmp/consul
+RUN mv /tmp/consul /usr/bin/consul
+
+# install consul-web-ui
+RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_web_ui.zip -O /tmp/consul-web-ui.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul-web-ui.zip -d /usr/local/consul-web-ui
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 5051 22 80 3000
+EXPOSE 5051 22 80 3000 8500 8300
 CMD ["/usr/bin/supervisord"]
