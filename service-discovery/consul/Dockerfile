@@ -1,4 +1,4 @@
-FROM workerbase
+FROM worker
 MAINTAINER twistedogic
 
 ENV DEBIAN_FRONTEND noninteractive
