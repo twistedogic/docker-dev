@@ -1,17 +1,9 @@
-FROM ubuntu
-MAINTAINER Jordan Li <twistedogic@gmail.com>
+FROM ubuntu:raring
+MAINTAINER Jordan Li
 
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get upgrade -y
-## DEPENDENCIES ##
-RUN apt-get update && apt-get install --assume-yes python-software-properties curl default-jdk git
+ENV DEBIAN_FRONTEND noninteractive
 
-# install maven from a PPA, it doesn't seem to be in the Docker Ubuntu distro.
-RUN add-apt-repository ppa:natecarlson/maven3
-RUN apt-get update && apt-get install --assume-yes maven3
-
-RUN apt-get install -y -q openjdk-6-jre-headless wget vim supervisor
+RUN apt-get update -y && apt-get install -y -q openjdk-6-jre-headless wget vim supervisor unzip curl
 RUN wget -q -O /opt/zookeeper-3.4.6.tar.gz http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
 RUN tar -xzf /opt/zookeeper-3.4.6.tar.gz -C /opt
 RUN cp /opt/zookeeper-3.4.6/conf/zoo_sample.cfg /opt/zookeeper-3.4.6/conf/zoo.cfg
@@ -32,11 +24,10 @@ RUN curl -O http://s3.amazonaws.com/downloads.mesosphere.io/master/ubuntu/12.04/
   apt-get clean
 
 ## MARATHON ##
-RUN git clone https://github.com/mesosphere/marathon.git /opt/marathon
-RUN cd /opt/marathon && mvn3 package
+RUN curl -sSfL http://downloads.mesosphere.io/marathon/marathon-0.4.0.tgz --output /opt/marathon.tgz && cd /opt && tar xzf marathon.tgz
+
 
 # install dependencies
-RUN apt-get install -y unzip
 
 # install consul
 RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_linux_amd64.zip -O /tmp/consul.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul.zip -d /tmp/
