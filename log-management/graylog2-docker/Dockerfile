@@ -20,19 +20,22 @@ RUN \
   sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
   sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
 
-wget http://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar && mkdir —-parents /usr/local/bin/logstash && mv logstash-1.1.13-flatjar.jar /usr/local/bin/logstash/logstash.jar
+RUN wget http://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar && mkdir --parents /usr/local/bin/logstash && mv logstash-1.1.13-flatjar.jar /usr/local/bin/logstash/logstash.jar
 
+
+ADD ./supervisord-graylog.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./logstash.conf /etc/logstash.conf
-ADD ./supervisord-graylog.conf /etc/supervisor/conf.d
-
 # Expose ports
 #   - 22: sshd
 #   - 9000: Web interface
 #   - 12201: GELF (UDP & TCP)
 #   - 12900: REST API
-EXPOSE 22 9000 12201 12201/udp 12900
+#   - 6379:
+EXPOSE 22 9000 12201 12201/udp 12900 6379
 
 # Expose data directories
 VOLUME /opt/elasticsearch/data
 VOLUME /opt/mongodb
+RUN mkdir /data
+
 CMD ["/usr/bin/supervisord"]
