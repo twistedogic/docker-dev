@@ -19,7 +19,8 @@ VOLUME ["/data", "/etc/nginx/sites-enabled", "/var/log/nginx"]
 
 RUN apt-get update && apt-get install -y supervisor openjdk-7-jre-headless
 RUN wget http://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar -O /opt/logstash.jar --no-check-certificate
-
+ADD logstash.sh /usr/local/bin/logstash
+RUN chmod +x /usr/local/bin/logstash
 
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./logstash.conf /etc/logstash.conf

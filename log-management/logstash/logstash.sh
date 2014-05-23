@@ -13,14 +13,12 @@ if [ "$CFG" != "" ]; then
 else
     cat << EOF > /opt/logstash.conf
 input {
-  redis {
-  host => "127.0.0.1"
-  port => 6379
-  type => "redis-input"
-  data_type => "list"
-  key => "logstash"
-  format => "json_event"
-}
+ file {
+ type => "nginx_access"
+ path => ["/var/log/nginx/**"]
+ exclude => ["*.gz", "error.*"]
+ discover_interval => 10
+ }
 }
 output {
   stdout { debug => true debug_format => "json"}

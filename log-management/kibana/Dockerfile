@@ -9,30 +9,6 @@ ENV JAVA_HOME /usr/lib/jvm/java-6-openjdk-amd64
 RUN (cd /tmp && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.1.tar.gz -O pkg.tar.gz && tar zxf pkg.tar.gz && mv elasticsearch-* /opt/elasticsearch)
 RUN rm -rf /tmp/*
 
-# Install Redis.
-RUN \
-  cd /tmp && \
-  wget http://download.redis.io/redis-stable.tar.gz && \
-  tar xvzf redis-stable.tar.gz && \
-  cd redis-stable && \
-  make && \
-  make install && \
-  cp -f src/redis-sentinel /usr/local/bin && \
-  mkdir -p /etc/redis && \
-  cp -f *.conf /etc/redis && \
-  rm -rf /tmp/redis-stable* && \
-  sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
-  sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
-  sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
-  sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
-
-# Define mountable directories.
-VOLUME ["/data"]
-RUN wget http://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar -O /opt/logstash.jar --no-check-certificate
-ADD logstash.sh /usr/local/bin/logstash
-RUN chmod +x /usr/local/bin/logstash
-RUN rm -rf /tmp/*
-
 RUN (cd /tmp && wget --no-check-certificate https://github.com/elasticsearch/kibana/archive/v3.0.0milestone2.tar.gz -O pkg.tar.gz && tar zxf pkg.tar.gz && cd kibana-* && cp -rf ./* /usr/share/nginx/www/)
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 ADD kibana.sh /usr/local/bin/kibana
@@ -41,8 +17,6 @@ RUN rm -rf /tmp/*
 
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-EXPOSE 514
-EXPOSE 6379
 EXPOSE 9200
 EXPOSE 9300
 EXPOSE 80
