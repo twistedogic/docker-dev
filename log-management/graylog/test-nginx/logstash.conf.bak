@@ -7,14 +7,11 @@ input {
  discover_interval => 10
  }
 }
- 
-filter {
- grok {
- type => nginx_access
- pattern => "%{COMBINEDAPACHELOG}"
- }
-}
- 
+
 output {
- redis { host => "192.168.99.102" data_type => "list" key => "logstash" }
+ redis { 
+ host => "192.168.99.102" 
+ data_type => "list" 
+ key => "logstash" 
+ }
 }
