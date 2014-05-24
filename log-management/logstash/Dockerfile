@@ -23,5 +23,4 @@ ADD logstash.sh /usr/local/bin/logstash
 RUN chmod +x /usr/local/bin/logstash
 
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD ./logstash.conf /etc/logstash.conf
 CMD ["/usr/bin/supervisord"]
