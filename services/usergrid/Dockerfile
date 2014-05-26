@@ -24,8 +24,8 @@ RUN apt-get install -y oracle-java7-installer oracle-java7-set-default
 RUN apt-get update
 
 # Install Cassandra
-RUN echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/datastax.sources.list
-RUN curl -L http://debian.datastax.com/debian/repo_key | sudo apt-key add -
+RUN echo "deb http://debian.datastax.com/community stable main" | tee -a /etc/apt/sources.list.d/datastax.sources.list
+RUN curl -L http://debian.datastax.com/debian/repo_key | apt-key add -
 RUN apt-get update
 RUN apt-get install -y dsc20
 
@@ -58,7 +58,7 @@ RUN rm -rf /opt/tomcat/webapps/examples
 RUN rm -rf /opt/tomcat/webapps/docs
 
 # Replace "random" with "urandom" for quicker startups
-RUN sudo rm /dev/random && sudo ln -s /dev/urandom /dev/random
+RUN rm /dev/random && ln -s /dev/urandom /dev/random
 
 # VOLUME ["/opt/tomcat/logs", "/opt/tomcat/work", "/opt/tomcat/temp", "/tmp/hsperfdata_root"
 
