@@ -37,6 +37,8 @@ RUN chmod 755 /usr/local/bin/cass-dock
 ADD shutdown.sh /usr/local/bin/cass-stop
 RUN chmod 755 /usr/local/bin/cass-stop
 
+RUN mkdir /maven
+
 ENV TOMCAT_VERSION 7.0.53
 ENV DEPLOY_DIR /maven
 
@@ -68,8 +70,12 @@ ENV PATH $PATH:$CATALINA_HOME/bin
 RUN git clone https://github.com/usergrid/usergrid.git /opt/usergrid
 RUN cd /opt/usergrid/stack && mvn clean install -DskipTests=true
 RUN mv /opt/usergrid/stack/rest/target/ROOT.war /maven/ROOT.war
+RUN rm -rf /opt/apache-tomcat-7.0.53/webapps/ROOT
+RUN rm -rf /opt/tomcat/webapps/ROOT
 
+ADD ./usergrid-deployment.properties /opt/apache-tomcat-7.0.53/lib/usergrid-deployment.properties
+ADD ./usergrid-deployment.properties /opt/tomcat/lib/usergrid-deployment.properties
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-EXPOSE 7199 7000 7001 9160 9042 8080
+EXPOSE 7199 7000 7001 9160 9042 8080 22
 CMD ["/usr/bin/supervisord"]
