@@ -1,6 +1,6 @@
 #!/bin/bash
 location=$(pwd)
-KID=$(docker run --name kibana -h kibana -p 80:80 -p 9300:9300 -p 9200:9200 kibana)
+KID=$(docker run --name kibana -d -h kibana -p 80:80 -p 9300:9300 -p 9200:9200 kibana)
 KIP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${KID})
 CID=$(docker run --name consul1 -h master -e ES_HOST=${KIP} -d -p 3000:3000 -p 8080:8080 -p 9002:22 -p 8500:8500 consul)
 MIP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CID})
