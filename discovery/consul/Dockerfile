@@ -11,8 +11,14 @@ RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_linux_amd64.zip -O /tmp/c
 RUN chmod +x /tmp/consul
 RUN mv /tmp/consul /usr/bin/consul
 
+RUN apt-get update && apt-get install -y supervisor openjdk-7-jre-headless
+RUN wget http://logstash.objects.dreamhost.com/release/logstash-1.1.13-flatjar.jar -O /opt/logstash.jar --no-check-certificate
+ADD logstash.sh /usr/local/bin/logstash
+
 # install consul-web-ui
 RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_web_ui.zip -O /tmp/consul-web-ui.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul-web-ui.zip -d /usr/local/consul-web-ui
+
+RUN mkdir /etc/consul.d
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 22 80 3000 8500 8300 7777

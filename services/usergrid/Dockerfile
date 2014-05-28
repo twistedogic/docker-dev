@@ -68,13 +68,12 @@ ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
 
 RUN git clone https://github.com/usergrid/usergrid.git /opt/usergrid
+ADD ./usergrid-deployment.properties /opt/usergrid/stack/config/src/main/resources/usergrid-default.properties
 RUN cd /opt/usergrid/stack && mvn clean install -DskipTests=true
 RUN mv /opt/usergrid/stack/rest/target/ROOT.war /maven/ROOT.war
 RUN rm -rf /opt/apache-tomcat-7.0.53/webapps/ROOT
 RUN rm -rf /opt/tomcat/webapps/ROOT
 
-ADD ./usergrid-deployment.properties /opt/apache-tomcat-7.0.53/lib/usergrid-deployment.properties
-ADD ./usergrid-deployment.properties /opt/tomcat/lib/usergrid-deployment.properties
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 7199 7000 7001 9160 9042 8080 22
