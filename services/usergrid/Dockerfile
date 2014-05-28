@@ -7,7 +7,7 @@ RUN echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu precise main"
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886
 RUN apt-get update
 ## DEPENDENCIES ##
-RUN apt-get update && apt-get install --assume-yes python-software-properties curl default-jdk git supervisor tomcat7 openssh-server && \
+RUN apt-get update && apt-get install --assume-yes python-software-properties curl default-jdk git supervisor openssh-server && \
     mkdir /var/run/sshd && chmod 700 /var/run/sshd && \
     echo 'root:root' | chpasswd
 # install maven from a PPA, it doesn't seem to be in the Docker Ubuntu distro.
@@ -60,7 +60,7 @@ RUN rm -rf /opt/tomcat/webapps/examples
 RUN rm -rf /opt/tomcat/webapps/docs
 
 # Replace "random" with "urandom" for quicker startups
-RUN rm /dev/random && ln -s /dev/urandom /dev/random
+RUN rm /dev/random && ln -s /dev/urandom /dev/randomcat
 
 # VOLUME ["/opt/tomcat/logs", "/opt/tomcat/work", "/opt/tomcat/temp", "/tmp/hsperfdata_root"
 
@@ -68,8 +68,8 @@ ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
 
 RUN git clone https://github.com/usergrid/usergrid.git /opt/usergrid
-ADD ./usergrid-deployment.properties /opt/usergrid/stack/config/src/main/resources/usergrid-default.properties
-RUN cd /opt/usergrid/stack && mvn clean install -DskipTests=true
+#ADD ./usergrid-deployment.properties /usergrid-custom.properties
+RUN cd /opt/usergrid/stack && mvn clean install -DskipTests=true -Dusergrid-custom-spring-properties=classpath:/usergrid-custom.properties
 RUN mv /opt/usergrid/stack/rest/target/ROOT.war /maven/ROOT.war
 RUN rm -rf /opt/apache-tomcat-7.0.53/webapps/ROOT
 RUN rm -rf /opt/tomcat/webapps/ROOT

@@ -23,18 +23,13 @@ input {
 }
 output {
   stdout { debug => true debug_format => "json"}
-EOF
-    if [ "$EMBEDDED" = "true" ]; then
-        cat << EOF >> /opt/logstash.conf
-  elasticsearch { embedded => $EMBEDDED }
+  redis {
+   host => "$ES_HOST"
+   data_type => "list"
+   key => "logstash:redis"
+  }
 }
 EOF
-    else
-        cat << EOF >> /opt/logstash.conf
-  elasticsearch { embedded => $EMBEDDED host => "$ES_HOST" port => $ES_PORT }
-}
-EOF
-   fi
 fi
 
-java -jar /opt/logstash.jar agent -f /opt/logstash.conf -- web --backend elasticsearch://$ES_HOST:$ES_PORT/
+java -jar /opt/logstash.jar agent -f /opt/logstash.conf
