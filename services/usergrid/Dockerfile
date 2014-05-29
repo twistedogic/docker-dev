@@ -50,10 +50,11 @@ RUN ln -s /opt/apache-tomcat-${TOMCAT_VERSION} /opt/tomcat
 RUN rm /tmp/catalina.tar.gz
 
 # Add roles
-ADD tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
+ADD ./tomcat-users.xml /opt/apache-tomcat-${TOMCAT_VERSION}/conf/
 
 # Startup script
-ADD deploy-and-run.sh /opt/apache-tomcat-${TOMCAT_VERSION}/bin/
+ADD ./deploy-and-run.sh /opt/apache-tomcat-${TOMCAT_VERSION}/bin/
+RUN chmod 755 /opt/apache-tomcat-${TOMCAT_VERSION}/bin/deploy-and-run.sh
 
 # Remove unneeded apps
 RUN rm -rf /opt/tomcat/webapps/examples
@@ -68,8 +69,8 @@ ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$CATALINA_HOME/bin
 
 RUN git clone https://github.com/usergrid/usergrid.git /opt/usergrid
-#ADD ./usergrid-deployment.properties /usergrid-custom.properties
-RUN cd /opt/usergrid/stack && mvn clean install -DskipTests=true -Dusergrid-custom-spring-properties=classpath:/usergrid-custom.properties
+ADD ./usergrid-deployment.properties /opt/usergrid/stack/config/src/main/resources/usergrid-default.properties
+RUN cd /opt/usergrid/stack && mvn clean install -DskipTests=true 
 RUN mv /opt/usergrid/stack/rest/target/ROOT.war /maven/ROOT.war
 RUN rm -rf /opt/apache-tomcat-7.0.53/webapps/ROOT
 RUN rm -rf /opt/tomcat/webapps/ROOT
