@@ -1,0 +1,3 @@
+# run server with unicorn
+
+gem 'passenger'
