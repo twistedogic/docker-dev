@@ -79,7 +79,8 @@ ENV PATH /home/openproject/.rbenv/bin:$PATH
 ADD ./files/passenger-standalone.json /home/openproject/openproject/passenger-standalone.json
 ADD ./files/start_openproject.sh /home/openproject/start_openproject.sh
 ADD ./files/start_openproject_worker.sh /home/openproject/start_openproject_worker.sh
-
+RUN chmod 755 /home/openproject/start_openproject.sh
+RUN chmod 755 /home/openproject/start_openproject_worker.sh
 #
 # And, finally, launch supervisord in foreground mode.
 #

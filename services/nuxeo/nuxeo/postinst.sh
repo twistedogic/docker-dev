@@ -28,7 +28,7 @@ cat << EOF >> /etc/nuxeo/nuxeo.conf
 nuxeo.log.dir=/var/log/nuxeo
 nuxeo.pid.dir=/var/run/nuxeo
 nuxeo.data.dir=/var/lib/nuxeo/data
-nuxeo.bind.address=0.0.0.0
+nuxeo.bind.address=localhost
 nuxeo.server.http.port=8080
 nuxeo.server.ajp.port=0
 nuxeo.wizard.done=false

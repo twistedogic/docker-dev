@@ -26,6 +26,7 @@ ADD postinst.sh /root/postinst.sh
 ADD firstboot.sh /root/firstboot.sh
 ADD entrypoint.sh /entrypoint.sh
 ADD pgListener.py pgListener.py
+RUN chmod 755 /root/postinst.sh
 RUN /root/postinst.sh
 ADD pg_hba.conf /etc/postgresql/9.3/nuxeodb/pg_hba.conf
 
