@@ -79,10 +79,10 @@ ENV PATH /home/openproject/.rbenv/bin:$PATH
 ADD ./files/passenger-standalone.json /home/openproject/openproject/passenger-standalone.json
 ADD ./files/start_openproject.sh /home/openproject/start_openproject.sh
 ADD ./files/start_openproject_worker.sh /home/openproject/start_openproject_worker.sh
-
+ADD ./files/production.rb /home/openproject/openproject/config/environments/production.rb
 #
 # And, finally, launch supervisord in foreground mode.
 #
 ADD ./files/supervisord.conf /etc/supervisord.conf
-ENTRYPOINT ["supervisord", "-n"]
+CMD ["supervisord", "-n"]
 RUN echo "INFO: openproject ssh password: `cat /root/openproject-root-pw.txt`"
