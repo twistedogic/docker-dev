@@ -8,6 +8,7 @@ MAINTAINER twistedogic
 # Download latest LTS nuxeo version
 RUN wget http://community.nuxeo.com/static/releases/nuxeo-5.8/nuxeo-cap-5.8-tomcat.zip && mv nuxeo-cap-5.8-tomcat.zip nuxeo-distribution.zip
 
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV NUXEOCTL /var/lib/nuxeo/server/bin/nuxeoctl
 ENV NUXEO_CONF /etc/nuxeo/nuxeo.conf
 

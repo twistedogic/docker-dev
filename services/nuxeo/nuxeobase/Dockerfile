@@ -21,7 +21,6 @@ RUN wget -q -O - http://apt.nuxeo.org/nuxeo.key | apt-key add -
 
 # Upgrade Ubuntu
 RUN apt-get update
-RUN apt-get upgrade -y
 
 
 # Small trick to Install fuse(libreoffice dependency) because of container permission issue. 
@@ -30,7 +29,7 @@ RUN rm -rf /var/lib/dpkg/info/fuse.postinst
 RUN apt-get -y install fuse
 
 # Install Nuxeo Dependencies
-RUN sudo apt-get install -y acpid openjdk-7-jdk libreoffice imagemagick poppler-utils ffmpeg ffmpeg2theora ufraw libwpd-tools perl locales pwgen dialog supervisor unzip vim
+RUN sudo apt-get install -y acpid openjdk-7-jre-headless libreoffice imagemagick poppler-utils ffmpeg ffmpeg2theora ufraw libwpd-tools perl locales pwgen dialog supervisor unzip vim
 
 RUN mkdir -p /var/log/supervisor
 
