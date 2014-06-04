@@ -25,7 +25,11 @@ ADD nuxeo.apache2 /etc/apache2/sites-available/nuxeo
 ADD postinst.sh /root/postinst.sh
 ADD firstboot.sh /root/firstboot.sh
 ADD entrypoint.sh /entrypoint.sh
-ADD pgListener.py pgListener.py
+ADD pgListener.py /pgListener.py
+RUN chmod 755 /root/postinst.sh
+RUN chmod 755 /root/firstboot.sh
+RUN chmod 755 /entrypoint.sh
+RUN chmod 755 /pgListener.py
 RUN /root/postinst.sh
 ADD pg_hba.conf /etc/postgresql/9.3/nuxeodb/pg_hba.conf
 

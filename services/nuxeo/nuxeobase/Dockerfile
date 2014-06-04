@@ -15,9 +15,6 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get install -y python-software-properties wget sudo net-tools
 
-
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
-
 # Add Nuxeo Repository
 RUN apt-add-repository "deb http://apt.nuxeo.org/ precise fasttracks"
 RUN wget -q -O - http://apt.nuxeo.org/nuxeo.key | apt-key add -
