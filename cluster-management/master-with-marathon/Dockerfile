@@ -1,4 +1,4 @@
-FROM ubuntu:raring
+FROM ubuntu:trusty
 MAINTAINER Jordan Li
 
 ENV DEBIAN_FRONTEND noninteractive
