@@ -41,6 +41,7 @@ RUN mv /tmp/consul /usr/bin/consul
 
 # install consul-web-ui
 RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_web_ui.zip -O /tmp/consul-web-ui.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul-web-ui.zip -d /usr/local/consul-web-ui
+ADD sshd_config /etc/ssh/sshd_config
 
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
