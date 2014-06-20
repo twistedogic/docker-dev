@@ -28,6 +28,10 @@ RUN \
 ## MARATHON ##
 RUN curl -fL http://downloads.mesosphere.io/marathon/marathon_0.5.0-xcon2_noarch.deb -o /tmp/marathon.deb && dpkg -i /tmp/marathon.deb
 
+## CHRONOS ##
+RUN curl -sSfL http://downloads.mesosphere.io/chronos/chronos-2.1.0_mesos-0.14.0-rc4.tgz --output /tmp/chronos.tgz
+RUN cd /tmp && tar xzf chronos.tgz
+
 # install dependencies
 
 # install consul
@@ -40,5 +44,5 @@ RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_web_ui.zip -O /tmp/consul
 
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 5050 22 2181 2888 3888 9000 8081 8082 8300 8500
+EXPOSE 5050 22 2181 2888 3888 9000 8080 8081 8082 8300 8500
 CMD ["/usr/bin/supervisord"]
