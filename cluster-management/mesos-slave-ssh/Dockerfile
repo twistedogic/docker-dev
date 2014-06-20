@@ -1,5 +1,5 @@
-FROM ubuntu:raring
-MAINTAINER RedJack, LLC
+FROM ubuntu:trusty
+MAINTAINER twistedogic
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -23,10 +23,10 @@ true
 WORKDIR /tmp
 RUN \
   apt-get install -y curl openjdk-6-jre-headless && \
-  curl -O http://s3.amazonaws.com/downloads.mesosphere.io/master/ubuntu/12.04/mesos_0.18.0_amd64.deb && \
-  dpkg --unpack mesos_0.18.0_amd64.deb && \
+  curl -fL http://downloads.mesosphere.io/master/ubuntu/14.04/mesos_0.19.0~ubuntu14.04%2B1_amd64.deb -o /tmp/mesos.deb && \
+  dpkg -i /tmp/mesos.deb && \
   apt-get install -f -y && \
-  rm mesos_0.18.0_amd64.deb && \
+  rm mesos.deb && \
   apt-get clean
 
 RUN apt-get install -y -q supervisor vim curl

@@ -17,15 +17,16 @@ RUN \
 true
 
 WORKDIR /tmp
-RUN curl -O http://s3.amazonaws.com/downloads.mesosphere.io/master/ubuntu/12.04/mesos_0.18.0_amd64.deb && \
-  dpkg --unpack mesos_0.18.0_amd64.deb && \
+RUN \
+  apt-get install -y curl openjdk-6-jre-headless && \
+  curl -fL http://downloads.mesosphere.io/master/ubuntu/14.04/mesos_0.19.0~ubuntu14.04%2B1_amd64.deb -o /tmp/mesos.deb && \
+  dpkg -i /tmp/mesos.deb && \
   apt-get install -f -y && \
-  rm mesos_0.18.0_amd64.deb && \
+  rm mesos.deb && \
   apt-get clean
 
 ## MARATHON ##
-RUN curl -sSfL http://downloads.mesosphere.io/marathon/marathon-0.4.0.tgz --output /opt/marathon.tgz && cd /opt && tar xzf marathon.tgz
-
+RUN curl -fL http://downloads.mesosphere.io/marathon/marathon_0.5.0-xcon2_noarch.deb -o /tmp/marathon.deb && dpkg -i /tmp/marathon.deb
 
 # install dependencies
 
