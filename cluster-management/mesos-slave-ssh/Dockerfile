@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM twistedogic/worker
 MAINTAINER twistedogic
 
 ENV DEBIAN_FRONTEND noninteractive

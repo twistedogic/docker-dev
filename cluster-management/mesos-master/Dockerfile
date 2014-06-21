@@ -26,12 +26,17 @@ RUN \
   apt-get clean
 
 ## MARATHON ##
-RUN curl -fL http://downloads.mesosphere.io/marathon/marathon_0.5.0-xcon2_noarch.deb -o /tmp/marathon.deb && dpkg -i /tmp/marathon.deb
+ADD http://downloads.mesosphere.io/marathon/marathon-0.5.1/marathon-0.5.1.tgz /tmp/marathon.tgz
+RUN mkdir -p /opt/marathon && tar xzf /tmp/marathon.tgz -C /opt/marathon --strip=1 && rm -f /tmp/marathon.tgz
 
 ## CHRONOS ##
 RUN curl -sSfL http://downloads.mesosphere.io/chronos/chronos-2.1.0_mesos-0.14.0-rc4.tgz --output /tmp/chronos.tgz
 RUN cd /tmp && tar xzf chronos.tgz
 
+## STORM ##
+RUN curl -sSfL http://downloads.mesosphere.io/storm/storm-mesos-0.9.tgz --output /tmp/storm.tgz
+RUN cd /tmp && tar xzf storm.tgz
+RUN cd /tmp && wget http://downloads.mesosphere.io/storm/storm-starter-0.0.1-SNAPSHOT.jar
 # install dependencies
 
 # install consul

@@ -1,10 +1,10 @@
 # runnable base
-FROM ubuntu:raring
+FROM ubuntu:trusty
 
 # REPOS
 RUN apt-get -y update
-RUN apt-get install -y -q software-properties-common
-RUN add-apt-repository -y ppa:gophers/go/ubuntu
+RUN apt-get install -y -q python-software-properties software-properties-common
+#RUN add-apt-repository -y ppa:gophers/go
 RUN add-apt-repository -y ppa:chris-lea/node.js
 RUN add-apt-repository -y ppa:webupd8team/java
 RUN add-apt-repository -y ppa:nginx/stable
@@ -47,8 +47,8 @@ RUN apt-get install -y -q mongodb-10gen
 
 ## POSTGRES
 RUN echo "#!/bin/sh\nexit 101" > /usr/sbin/policy-rc.d; chmod +x /usr/sbin/policy-rc.d
-RUN apt-get install -y -q postgresql-9.1
-RUN apt-get install -y -q postgresql-contrib-9.1
+RUN apt-get install -y -q postgresql
+RUN apt-get install -y -q postgresql-contrib
 RUN rm /usr/sbin/policy-rc.d
 RUN apt-get install -y -q pgadmin3
 
@@ -105,7 +105,7 @@ RUN apt-get install -y -q libtiff-dev
 
 # # # JAVA
 # # # Broken
-RUN apt-get install -y firefox openjdk-7-jre-headless
+RUN apt-get install -y openjdk-7-jre-headless
 
 ENV DEBIAN_FRONTEND dialog
 
