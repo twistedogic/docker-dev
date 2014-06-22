@@ -2,16 +2,7 @@ FROM twistedogic/worker
 MAINTAINER twistedogic
 
 ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update
-RUN \
-  echo "# Install OpenSSH Server" ;\
-  apt-get -q -y install openssh-server ;\
-  mkdir -p /var/run/sshd ;\
-  echo 'root:passw0rd' | chpasswd ;\
-  \
-true
-
+RUN apt-get update -y
 
 # Make sure to install OpenJDK 6 explicitly.  The libmesos library includes an
 # RPATH entry, which is needed to find libjvm.so at runtime.  This RPATH is
