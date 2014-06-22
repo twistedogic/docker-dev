@@ -34,5 +34,6 @@ RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_web_ui.zip -O /tmp/consul
 ADD sshd_config /etc/ssh/sshd_config
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN mkdir -p /etc/consul.d
 EXPOSE 5051 22 80 3000 8500 8300
 CMD ["/usr/bin/supervisord"]

@@ -26,7 +26,7 @@ RUN \
   apt-get clean
 
 ## MARATHON ##
-ADD http://downloads.mesosphere.io/marathon/marathon-0.5.1/marathon-0.5.1.tgz /tmp/marathon.tgz
+RUN curl -sSfL http://downloads.mesosphere.io/marathon/marathon-0.5.1/marathon-0.5.1.tgz --output /tmp/marathon.tgz
 RUN mkdir -p /opt/marathon && tar xzf /tmp/marathon.tgz -C /opt/marathon --strip=1 && rm -f /tmp/marathon.tgz
 
 ## CHRONOS ##
@@ -50,5 +50,6 @@ ADD sshd_config /etc/ssh/sshd_config
 
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN mkdir -p /etc/consul.d
 EXPOSE 5050 22 2181 2888 3888 9000 8080 8081 8082 8300 8500
 CMD ["/usr/bin/supervisord"]
