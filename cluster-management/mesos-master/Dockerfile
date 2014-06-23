@@ -50,8 +50,8 @@ ADD sshd_config /etc/ssh/sshd_config
 
 RUN mkdir -p /var/log/supervisor
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ADD setup.sh /usr/bin/setandgo
-RUN chmod +x /usr/bin/setandgo
+#ADD setup.sh /usr/bin/setandgo
+#RUN chmod +x /usr/bin/setandgo
 RUN mkdir -p /etc/consul.d
 EXPOSE 5050 22 2181 2888 3888 9000 8080 8081 8082 8300 8500
-CMD ["/usr/bin/setandgo"]
+CMD ["/usr/bin/supervisord"]
