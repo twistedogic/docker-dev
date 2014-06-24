@@ -25,19 +25,6 @@ RUN \
   rm mesos.deb && \
   apt-get clean
 
-## MARATHON ##
-RUN curl -sSfL http://downloads.mesosphere.io/marathon/marathon-0.5.1/marathon-0.5.1.tgz --output /tmp/marathon.tgz
-RUN mkdir -p /opt/marathon && tar xzf /tmp/marathon.tgz -C /opt/marathon --strip=1 && rm -f /tmp/marathon.tgz
-
-## CHRONOS ##
-RUN curl -sSfL http://downloads.mesosphere.io/chronos/chronos-2.1.0_mesos-0.14.0-rc4.tgz --output /tmp/chronos.tgz
-RUN cd /tmp && tar xzf chronos.tgz
-
-## STORM ##
-RUN curl -sSfL http://downloads.mesosphere.io/storm/storm-mesos-0.9.tgz --output /tmp/storm.tgz
-RUN cd /tmp && tar xzf storm.tgz
-RUN cd /tmp && wget http://downloads.mesosphere.io/storm/storm-starter-0.0.1-SNAPSHOT.jar
-# install dependencies
 
 # install consul
 RUN wget https://dl.bintray.com/mitchellh/consul/0.2.0_linux_amd64.zip -O /tmp/consul.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul.zip -d /tmp/
