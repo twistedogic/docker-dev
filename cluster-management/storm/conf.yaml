@@ -1,8 +1,0 @@
-# Please change these for your cluster
-    # to reflect your cluster settings
-    # -----------------------------------------------------------
-    mesos.master.url: "zk://CHANGEME:2181/mesos"
-    storm.zookeeper.servers:
-        - "CHANGEME"
-    nimbus.host: "localhost"
-    #-----------------------------------------------------------
