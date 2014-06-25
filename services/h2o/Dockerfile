@@ -1,12 +1,19 @@
-FROM worker
+FROM twistedogic/worker
 MAINTAINER twistedogic
-RUN echo "deb http://archive.ubuntu.com/ubuntu quantal main universe multiverse" > /etc/apt/sources.list
 RUN apt-get update
+
+RUN (echo "deb http://cran.mtu.edu/bin/linux/ubuntu saucy/" >> /etc/apt/sources.list && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9)
+RUN (apt-get update && apt-get upgrade -y -q && apt-get dist-upgrade -y -q && apt-get -y -q autoclean && apt-get -y -q autoremove)
+RUN apt-get install -y -q r-base r-base-dev gdebi-core libapparmor1 supervisor sudo libcurl4-openssl-dev
+RUN (wget http://download2.rstudio.org/rstudio-server-0.98.939-amd64.deb && gdebi -n rstudio-server-0.98.939-amd64.deb)
+RUN rm /rstudio-server-0.98.939-amd64.deb
+RUN (adduser --disabled-password --gecos "" guest && echo "guest:guest"|chpasswd)
+
 RUN apt-get install -y unzip
 RUN wget http://s3.amazonaws.com/h2o-release/h2o/rel-knuth/11/h2o-2.4.3.11.zip -O /opt/h2o-2.4.3.11.zip --no-check-certificate
 RUN cd /opt && unzip h2o-2.4.3.11.zip
 ADD ./run.sh /usr/bin/h2o
 RUN chmod +x /usr/bin/h2o
-EXPOSE 54321
-EXPOSE 58682
-CMD ["/usr/bin/h2o"]
+ADD ./setup.r /tmp/setup.r
+EXPOSE 54321 58682 8787 22
+CMD ["/usr/bin/supervisord"]
