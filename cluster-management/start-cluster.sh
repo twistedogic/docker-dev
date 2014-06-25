@@ -9,5 +9,5 @@ S2=$(docker run -h marathon1 -p 8080:8080 --name marathon1 --dns=172.17.42.1 --d
 S3=$(docker run -h chronos1 -p 8082:8081 --name chronos1 --dns=172.17.42.1 --dns=8.8.8.8 -d twistedogic/chronos /opt/chronos/bin/start-chronos.bash --master zk://${MIP}:2181/mesos --zk_hosts zk://${MIP}:2181/mesos --http_port 8081)
 cp ${location}/template.yaml ${location}/storm_conf/storm.yaml
 sed -i "s|CHANGEME|${MIP}|" ${location}/storm_conf/storm.yaml
-S4=$(docker run -d -p 8083:8080 -v ${location}/storm_conf/:/opt/storm/conf/ twistedogic/storm)
+S4=$(docker run -d -p 8083:8080 --dns=172.17.42.1 --dns=8.8.8.8  -v ${location}/storm_conf/:/opt/storm/conf/ twistedogic/storm)
 docker ps -a
