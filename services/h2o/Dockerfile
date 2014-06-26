@@ -14,6 +14,9 @@ RUN wget http://s3.amazonaws.com/h2o-release/h2o/rel-knuth/11/h2o-2.4.3.11.zip -
 RUN cd /opt && unzip h2o-2.4.3.11.zip
 ADD ./run.sh /usr/bin/h2o
 RUN chmod +x /usr/bin/h2o
-ADD ./setup.r /tmp/setup.r
-EXPOSE 54321 58682 8787 22
+RUN sudo su - \
+    -c "R -e \"install.packages('shiny', repos='http://cran.rstudio.com/')\""
+RUN (wget http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.1.0.10000-amd64.deb && gdebi shiny-server-1.1.0.10000-amd64.deb)
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+EXPOSE 54321 58682 8787 8000 22
 CMD ["/usr/bin/supervisord"]
