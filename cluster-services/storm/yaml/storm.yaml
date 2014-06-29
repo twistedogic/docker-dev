@@ -1,8 +1,8 @@
 
 storm.zookeeper.servers:
-    - "localhost"
+    - "172.17.1.6"
 
-nimbus.host: "localhost"
+nimbus.host: "172.17.1.6"
 
 # netty transport
 storm.messaging.transport: "backtype.storm.messaging.netty.Context"
@@ -12,6 +12,6 @@ storm.messaging.netty.min_wait_ms: 1000
 storm.messaging.netty.max_wait_ms: 5000
 
 drpc.servers:
-  - "localhost"
+  - "172.17.1.6"
 drpc.port: 3772
 drpc.invocations.port: 3773

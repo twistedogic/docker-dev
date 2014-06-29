@@ -1,11 +1,5 @@
-FROM wurstmeister/storm:0.9.1
-MAINTAINER Wurstmeister
-RUN /usr/bin/config-supervisord.sh ui
+FROM twistedogic/storm
+MAINTAINER twistedogic
 
 EXPOSE 8080
-CMD /usr/bin/start-supervisor.sh
-
-
-
-
-
+CMD ["/usr/local/storm/bin/storm", "ui"]

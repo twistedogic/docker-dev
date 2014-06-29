@@ -1,9 +1,9 @@
 # Please change these for your cluster
 # to reflect your cluster settings
 # -----------------------------------------------------------
-mesos.master.url: "zk://172.17.0.2:2181/mesos"
+mesos.master.url: "zk://localhost:2181/mesos"
 storm.zookeeper.servers:
-    - "172.17.0.2"
+    - "localhost"
 nimbus.host: "localhost"
 # -----------------------------------------------------------
 
@@ -26,4 +26,3 @@ mesos.framework.checkpoint: false
 #  - host1
 #mesos.disallowed.hosts:
 #  - host1
-

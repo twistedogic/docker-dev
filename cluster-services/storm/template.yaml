@@ -1,8 +1,8 @@
 
 storm.zookeeper.servers:
-    - "localhost"
+    - "CHANGEME"
 
-nimbus.host: "localhost"
+nimbus.host: "CHANGEME"
 
 # netty transport
 storm.messaging.transport: "backtype.storm.messaging.netty.Context"
@@ -12,6 +12,6 @@ storm.messaging.netty.min_wait_ms: 1000
 storm.messaging.netty.max_wait_ms: 5000
 
 drpc.servers:
-  - "localhost"
+  - "CHANGEME"
 drpc.port: 3772
 drpc.invocations.port: 3773

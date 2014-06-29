@@ -26,4 +26,3 @@ mesos.framework.checkpoint: false
 #  - host1
 #mesos.disallowed.hosts:
 #  - host1
-

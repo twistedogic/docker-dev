@@ -1,4 +1,4 @@
-FROM twistedogic/worker
+FROM twistedogic/h2o
 MAINTAINER twistedogic
 
 ENV DEBIAN_FRONTEND noninteractive

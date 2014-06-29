@@ -1,15 +1,8 @@
 #!/bin/bash
-
-ZOOKEEPER=`docker ps -a | awk '{print $NF}'  | grep "zookeeper$"`
-ZOOKEEPER_RUNNING=$?
-if [ $ZOOKEEPER_RUNNING -eq 0 ] ;
-then
-    echo "Zookeeper is already running"
-else
-    echo "Starting Zookeeper"
-    docker run -p 49181:2181  -h zookeeper --name zookeeper -d jplock/zookeeper
-fi
-
-docker run -p 49773:3773 -p 49772:3772 -p 49627:6627 --name nimbus --link zookeeper:zk -h nimbus -d wurstmeister/storm-nimbus 
-docker run -p 49000:8000 --name supervisor --link nimbus:nimbus --link zookeeper:zk -h supervisor -d wurstmeister/storm-supervisor
-docker run -p 49080:8080 --name ui --link nimbus:nimbus --link zookeeper:zk -d wurstmeister/storm-ui
+location=$(pwd)
+CID=$(docker run -h nimbus --name nimbus -d -p 172.17.42.1:53:8600 -p 172.17.42.1:53:8600/udp --dns=172.17.42.1 --dns=8.8.8.8 -p 6627:6627 -p 2181:2181 -p 8500:8500 twistedogic/storm-nimbus)
+MIP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CID})
+cp ${location}/template.yaml ${location}/yaml/storm.yaml
+sed -i "s|CHANGEME|${MIP}|" ${location}/yaml/storm.yaml
+S1=$(docker run -h ui --name ui -p 8080:8080 --dns=172.17.42.1 --dns=8.8.8.8 -d -v ${location}/yaml:/usr/local/storm/conf/ twistedogic/storm-ui)
+S2=$(docker run -h supervisor --name supervisor --link nimbus:nimbus --dns=172.17.42.1 --dns=8.8.8.8 -d twistedogic/storm-supervisor)
