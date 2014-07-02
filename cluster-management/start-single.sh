@@ -1,6 +1,6 @@
 #!/bin/bash
 location=$(pwd)
-CID=$(docker run -h master --name master -d -p 5050:5050 -p 8787:8787 -p 3000:3000 -p 7777:7777 -p 9200:9200 -p 9300:9300 -p 80:80 -p 172.17.42.1:53:8600 -p 172.17.42.1:53:8600/udp --dns=172.17.42.1 --dns=8.8.8.8 -p 2181:2181 -p 8500:8500 twistedogic/mesos-master)
+CID=$(docker run -h master --name master -d -p 5050:5050 -p 8787:8787 -p 3000:3000 -p 7777:7777 -p 9200:9200 -p 9300:9300 -p 80:80 -p 172.17.42.1:53:8600 -p 172.17.42.1:53:8600/udp --dns=172.17.42.1 --dns=8.8.8.8 -p 2181:2181 -p 8500:8500 twistedogic/mesos-worker)
 MIP=$(docker inspect --format '{{ .NetworkSettings.IPAddress }}' ${CID})
 cp ${location}/template.conf ${location}/slave_conf/supervisord.conf
 sed -i "s|CHANGEME|${MIP}|" ${location}/slave_conf/supervisord.conf
@@ -8,4 +8,4 @@ cp ${location}/template.yaml ${location}/storm_conf/storm.yaml
 sed -i "s|CHANGEME|${MIP}|" ${location}/storm_conf/storm.yaml
 S2=$(docker run -h marathon1 -p 8080:8080 --name marathon1 --dns=172.17.42.1 --dns=8.8.8.8 -d twistedogic/marathon /opt/marathon/bin/start --master zk://${MIP}:2181/mesos --zk zk://${MIP}:2181/marathon)
 S3=$(docker run -h chronos1 -p 8082:8081 --name chronos1 --dns=172.17.42.1 --dns=8.8.8.8 -d twistedogic/chronos /opt/chronos/bin/start-chronos.bash --master zk://${MIP}:2181/mesos --zk_hosts zk://${MIP}:2181/mesos --http_port 8081)
-S4=$(docker run -h storm1 --name storm1 -d -p 8083:8080 --dns=172.17.42.1 --dns=8.8.8.8  -v ${location}/storm_conf/:/opt/storm/conf/ twistedogic/storm)
+S4=$(docker run -h storm1 --name storm1 -d -p 8083:8080 --dns=172.17.42.1 --dns=8.8.8.8  -v ${location}/storm_conf/:/opt/storm/conf/ twistedogic/storm-mesos)
