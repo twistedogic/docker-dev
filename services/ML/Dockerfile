@@ -1,4 +1,4 @@
-FROM worker
+FROM twistedogic/worker
 MAINTAINER twistedogic
 RUN echo "deb http://archive.ubuntu.com/ubuntu quantal main universe multiverse" > /etc/apt/sources.list
 RUN apt-get update
