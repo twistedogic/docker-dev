@@ -80,6 +80,14 @@ ADD ./files/passenger-standalone.json /home/openproject/openproject/passenger-st
 ADD ./files/start_openproject.sh /home/openproject/start_openproject.sh
 ADD ./files/start_openproject_worker.sh /home/openproject/start_openproject_worker.sh
 ADD ./files/production.rb /home/openproject/openproject/config/environments/production.rb
+RUN chmod +x /home/openproject/start_openproject.sh
+RUN chmod +x /home/openproject/start_openproject_worker.sh
+RUN apt-get update && apt-get install cron -y
+ADD sshd_config /etc/ssh/sshd_config
+ADD ./files/backup.sh /root/backup.sh
+RUN chmod +x /root/backup.sh
+RUN crontab -l | { cat; echo "30 15 * * * /root/backup.sh 2>&1>> /root/MySQLdump.log"; } | crontab -
+RUN cd /root && mkdir sqldump
 #
 # And, finally, launch supervisord in foreground mode.
 #
