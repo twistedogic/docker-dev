@@ -25,6 +25,7 @@ RUN apt-get install -y -q git
 RUN apt-get install -y -q make
 RUN apt-get install -y -q wget
 RUN apt-get install -y -q supervisor
+RUN apt-get install -y -q unzip
 
 # BUILD
 RUN apt-get install -y -q build-essential

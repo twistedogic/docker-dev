@@ -18,5 +18,5 @@ RUN sudo su - \
     -c "R -e \"install.packages('shiny', repos='http://cran.rstudio.com/')\""
 RUN (wget http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.1.0.10000-amd64.deb && gdebi shiny-server-1.1.0.10000-amd64.deb)
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-EXPOSE 54321 58682 8787 8000 22
+EXPOSE 54321 58682 8787 8000 22 7777
 CMD ["/usr/bin/supervisord"]
