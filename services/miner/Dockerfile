@@ -1,9 +1,8 @@
-# runnable base
+#runnable base
 FROM twistedogic/worker
 
 # REPOS
 RUN apt-get -y update
-RUN wget -q -O /opt/ufasoft_coin-miner-0.68-x64-portable.tar.xz http://darkgamex.ch/ufasoft/ufasoft_coin-miner-0.68-x64-portable.tar.xz
-RUN cd /opt && tar xvfJ ufasoft_coin-miner-0.68-x64-portable.tar.xz
-ENV LD_LIBRARY_PATH /opt/ufasoft_coin-miner-0.68-x64-portable/libs
-ENTRYPOINT    ["/opt/ufasoft_coin-miner-0.68-x64-portable/bin/coin-miner"] 
+RUN wget -q -O /opt/pooler-cpuminer-2.4-linux-x86_64.tar.gz http://sourceforge.net/projects/cpuminer/files/pooler-cpuminer-2.4-linux-x86_64.tar.gz
+RUN cd /opt && tar zxf pooler-cpuminer-2.4-linux-x86_64.tar.gz
+ENTRYPOINT    ["/opt/minerd"] 
