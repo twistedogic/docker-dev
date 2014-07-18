@@ -1,7 +1,7 @@
 FROM ubuntu:trusty
 MAINTAINER twistedogic
 
-RUN apt-get update && apt-get install -y wget unzip curl runit openssh-server && mkdir -p /var/run/sshd && \
+RUN apt-get update && apt-get install -y wget supervisor git unzip curl runit openssh-server && mkdir -p /var/run/sshd && \
     echo 'root:root' |chpasswd
 
 RUN apt-get install -y -q python-software-properties software-properties-common build-essential
@@ -35,7 +35,6 @@ RUN chmod +x /usr/bin/h2o
 
 RUN R -e "install.packages('shiny', repos='http://cran.rstudio.com/')"
 RUN npm install -g shiny-server
-RUN gem install compass 
 RUN cd /home/ && npm install codebox@0.7.6
 ADD package.json /home/node_modules/codebox/node_modules/connect-gzip-static/package.json
 RUN cd /home/node_modules/codebox/node_modules/connect-gzip-static/ && npm install
