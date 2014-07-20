@@ -25,6 +25,7 @@ ADD ./logstash-redis.sh /usr/local/bin/logstash-redis
 RUN chmod +x /usr/local/bin/logstash-redis
 
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN mkdir /data
 
 EXPOSE 6379
 EXPOSE 9200
