@@ -1,4 +1,4 @@
 #!/bin/bash
 location=$(pwd)
-docker build -t consul .
+docker build -t twistedogic/consul .
 echo "build completed!"
