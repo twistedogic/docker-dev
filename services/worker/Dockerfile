@@ -20,16 +20,10 @@ RUN apt-get install -y -q vim
 RUN apt-get install -y -q nano
 
 # TOOLS
-RUN apt-get install -y -q curl
-RUN apt-get install -y -q git
-RUN apt-get install -y -q make
-RUN apt-get install -y -q wget
-RUN apt-get install -y -q supervisor
-RUN apt-get install -y -q unzip
+RUN apt-get install -y -q curl git make wget supervisor unzip
 
 # BUILD
-RUN apt-get install -y -q build-essential
-RUN apt-get install -y -q g++
+RUN apt-get install -y -q build-essential g++
 
 # SERVICES
 
