@@ -1,0 +1,56 @@
+#cloud-config
+users:
+  - name: vagrant
+    passwd: $6$rounds=4096$ftnGi6EgCYI$cIwmeKWKbFYQ5puXRgNihJm.Nicva.p2OcCtKb//n8A3AZ7EQNtVyOM54GP1cMPOUHaOauiPr81AajrKO.1ym/
+    groups:
+     - sudo
+     - docker
+coreos:
+  etcd:
+      # generate a new token for each unique cluster from https://discovery.etcd.io/new
+      # WARNING: replace each time you 'vagrant destroy'
+      #discovery: https://discovery.etcd.io/<token>
+      addr: $public_ipv4:4001
+      peer-addr: $public_ipv4:7001
+  units:
+    - name: etcd.service
+      command: start
+      enable: true
+      content: |
+      [Unit]
+        Description=Etcd Server
+        After=network.target
+        
+        [Service]
+        Type=simple
+        # etc logs to the journal directly, suppress double logging
+        StandardOutput=null
+        WorkingDirectory=/var/lib/etcd
+        ExecStart=/usr/bin/etcd
+
+        [Install]
+        WantedBy=multi-user.target
+    - name: fleet.service
+      command: start
+      runtime: no
+      content: |
+        [Unit]
+        Description=fleet
+
+        [Service]
+        Environment=FLEET_PUBLIC_IP=$public_ipv4
+        ExecStart=/usr/bin/fleet
+    - name: docker-tcp.socket
+      command: start
+      enable: true
+      content: |
+        [Unit]
+        Description=Docker Socket for the API
+
+        [Socket]
+        ListenStream=2375
+        Service=docker.service
+        BindIPv6Only=both
+
+        [Install]
+        WantedBy=sockets.target
