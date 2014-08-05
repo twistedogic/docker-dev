@@ -25,45 +25,6 @@ RUN apt-get install -y -q curl git make wget supervisor unzip
 # BUILD
 RUN apt-get install -y -q build-essential g++
 
-# SERVICES
-
-## MEMCACHED
-RUN apt-get install -y -q memcached
-#RUN pecl install -y memcache
-
-## COUCHDB
-RUN apt-get install -y -q couchdb
-
-## REDIS
-RUN apt-get install -y -q redis-server
-
-## MONGO
-RUN apt-get install -y -q mongodb-10gen
-
-## POSTGRES
-RUN echo "#!/bin/sh\nexit 101" > /usr/sbin/policy-rc.d; chmod +x /usr/sbin/policy-rc.d
-RUN apt-get install -y -q postgresql
-RUN apt-get install -y -q postgresql-contrib
-RUN rm /usr/sbin/policy-rc.d
-RUN apt-get install -y -q pgadmin3
-
-## MAGICK
-RUN apt-get install -y -q imagemagick
-RUN apt-get install -y -q graphicsmagick
-RUN apt-get install -y -q graphicsmagick-libmagick-dev-compat
-# #RUN pecl install -y imagick
-
-## APACHE
-RUN apt-get install -y -q apache2
-RUN apt-get install -y -q libapache2-mod-php5
-
-## MYSQL
-RUN apt-get install -y -q mysql-client
-RUN apt-get install -y -q mysql-server
-
-## NGINX
-RUN apt-get install -y -q nginx
-
 # LANGS
 
 ## GO
@@ -89,14 +50,6 @@ RUN apt-get install -y -q python-dev
 RUN apt-get install -y -q python-distribute
 RUN apt-get install -y -q python-pip
 RUN pip --no-input --exists-action=w install --upgrade pip
-
-# LIBS
-RUN apt-get install -y -q libjpeg8-dev
-RUN apt-get install -y -q zlib1g-dev
-RUN apt-get install -y -q libfreetype6-dev
-RUN apt-get install -y -q liblcms1-dev
-RUN apt-get install -y -q libwebp-dev
-RUN apt-get install -y -q libtiff-dev
 
 # # # JAVA
 # # # Broken

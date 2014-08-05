@@ -1,4 +1,4 @@
-FROM twistedogic/dashboard
+FROM ubuntu:trusty
 MAINTAINER twistedogic
 
 RUN apt-get update
