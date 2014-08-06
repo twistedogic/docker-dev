@@ -1,7 +1,7 @@
 FROM twistedogic/worker
 MAINTAINER twistedogic
 RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential wget nginx-full supervisor
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential wget nginx-full supervisor redis-server
 RUN (cd /tmp && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.1.tar.gz -O pkg.tar.gz && tar zxf pkg.tar.gz && mv elasticsearch-* /opt/elasticsearch)
 RUN rm -rf /tmp/*
 

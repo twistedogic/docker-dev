@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM twistedogic/worker
 MAINTAINER twistedogic
 
 RUN apt-get update
@@ -13,9 +13,5 @@ RUN cd /opt && unzip h2o-2.4.4.3.zip
 ADD ./run.sh /usr/bin/h2o
 RUN chmod +x /usr/bin/h2o
 
-RUN R -e "install.packages('shiny', repos='http://cran.rstudio.com/')"
-RUN npm install -g shiny-server
-
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 54321 58682 8787 8000 22 7777
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/h2o"]
