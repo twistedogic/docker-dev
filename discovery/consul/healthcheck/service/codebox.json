@@ -1,0 +1,9 @@
+{
+    "service": {
+        "name": "codebox",
+        "check": {
+            "script": "/usr/local/bin/process.sh codebox",
+            "interval": "10s"
+        }
+    }
+}

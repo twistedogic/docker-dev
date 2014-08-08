@@ -20,6 +20,14 @@ RUN chmod +x /usr/local/bin/logstash
 RUN wget https://dl.bintray.com/mitchellh/consul/0.3.1_web_ui.zip -O /tmp/consul-web-ui.zip -P /tmp/ --no-check-certificate && unzip /tmp/consul-web-ui.zip -d /usr/local/consul-web-ui
 
 RUN mkdir /etc/consul.d
+ADD ./healthcheck/script/cpu.sh /usr/local/bin/cpu.sh
+ADD ./healthcheck/script/mem.sh /usr/local/bin/mem.sh
+ADD ./healthcheck/script/process.sh /usr/local/bin/process.sh
+RUN chmod u+x /usr/local/bin/process.sh
+RUN chmod u+x /usr/local/bin/cpu.sh
+RUN chmod u+x /usr/local/bin/mem.sh
+ADD ./healthcheck/check/cpu.json /etc/consul.d/cpu.json
+ADD ./healthcheck/check/mem.json /etc/consul.d/mem.json
 RUN mkdir -p /var/log/supervisor
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 EXPOSE 22 80 3000 8500 8300 7777
