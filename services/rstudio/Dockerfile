@@ -1,29 +1,8 @@
 ## start with the latest ubuntu
-FROM twistedogic/worker
+FROM twistedogic/r
 
 ## That's me
 MAINTAINER twistedogic
-
-## Remain current
-RUN apt-get update -qq
-RUN apt-get dist-upgrade -y
-
-## get tool
-RUN apt-get install -y software-properties-common
-
-## Add CRAN repo to get current R
-RUN add-apt-repository "deb http://cran.rstudio.com/bin/linux/ubuntu $(lsb_release -cs)/"
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-
-## Update again
-RUN apt-get update -qq
-RUN apt-get dist-upgrade -y
-
-RUN apt-get install -y --no-install-recommends r-base r-base-dev r-recommended littler
-RUN ln -s /usr/share/doc/littler/examples/install.r /usr/local/bin/install.r
-
-## Install a few more things that are useful
-RUN apt-get install -y --no-install-recommends vim-tiny
 
 ## User-configurable environmental variables
 ENV DEBIAN-FRONTEND noninteractive
@@ -39,7 +18,7 @@ RUN (echo "deb http://cran.mtu.edu/bin/linux/ubuntu trusty/" >> /etc/apt/sources
 RUN apt-get update -q && apt-get dist-upgrade -yq && apt-get install -y -q gdebi-core libapparmor1 supervisor sudo libcurl4-openssl-dev wget git && update-locale
 
 #### And now we're ready for rstudio server
-RUN wget http://download2.rstudio.org/rstudio-server-0.98.994-amd64.deb && gdebi -n rstudio-server-0.98.994-amd64.deb && rm rstudio-server-*-amd64.deb
+RUN wget http://download1.rstudio.org/rstudio-0.98.1028-amd64.deb  && gdebi -n rstudio-server-0.98.1028-amd64.deb && rm rstudio-server-*-amd64.deb
 RUN useradd -m $USER && echo "$USER:$PASSWORD" | chpasswd
 
 ## These shell scripts are executed by supervisord when it is run by CMD
