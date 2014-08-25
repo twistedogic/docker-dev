@@ -66,7 +66,6 @@ RUN \
 true
 
 ADD sshd_config /etc/ssh/sshd_config
-RUN gem install compass 
 RUN cd /home/ && npm install codebox@0.7.6
 ADD package.json /home/node_modules/codebox/node_modules/connect-gzip-static/package.json
 RUN cd /home/node_modules/codebox/node_modules/connect-gzip-static/ && npm install
