@@ -1,5 +1,5 @@
 ## start with the latest ubuntu
-FROM twistedogic/r
+FROM twistedogic/rstudio
 
 ## That's me
 MAINTAINER twistedogic
