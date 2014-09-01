@@ -7,12 +7,12 @@ MAINTAINER twistedogic
 RUN apt-get -y update
 RUN apt-get install -y -q python-software-properties software-properties-common
 #RUN add-apt-repository -y ppa:gophers/go
-RUN add-apt-repository -y ppa:chris-lea/node.js
-RUN add-apt-repository -y ppa:webupd8team/java
-RUN add-apt-repository -y ppa:nginx/stable
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
-RUN apt-get -y update
+# RUN add-apt-repository -y ppa:chris-lea/node.js
+# RUN add-apt-repository -y ppa:webupd8team/java
+# RUN add-apt-repository -y ppa:nginx/stable
+# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+# RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
+# RUN apt-get -y update
 
 #SHIMS
 ENV DEBIAN_FRONTEND noninteractive

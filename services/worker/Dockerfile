@@ -24,6 +24,12 @@ RUN apt-get install -y -q curl git make wget supervisor unzip
 
 # BUILD
 RUN apt-get install -y -q build-essential g++
+RUN wget http://www.scala-lang.org/files/archive/scala-2.11.2.deb && dpkg -i scala-2.11.2.deb
+RUN apt-get update -y
+RUN apt-get install scala -y
+wget http://dl.bintray.com/sbt/debian/sbt-0.13.5.deb && dpkg -i sbt-0.13.5.deb 
+RUN apt-get update -y
+RUN apt-get install sbt -y
 
 # LANGS
 
