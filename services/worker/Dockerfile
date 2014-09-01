@@ -55,6 +55,11 @@ RUN pip --no-input --exists-action=w install --upgrade pip
 # # # Broken
 RUN apt-get install -y openjdk-7-jre-headless
 
+# LIB
+RUN apt-get install libcurl4-openssl-dev -y
+RUN apt-get install libxml2-dev -y
+RUN apt-get install libglpk-dev -y
+
 ENV DEBIAN_FRONTEND dialog
 
 RUN \
