@@ -4,6 +4,8 @@ FROM dustin/r-studio-server
 ## That's me
 MAINTAINER twistedogic
 
+RUN echo 'root:passw0rd' | chpasswd
+
 RUN apt-get -y update
 RUN apt-get install -y -q python-software-properties software-properties-common
 #RUN add-apt-repository -y ppa:gophers/go
@@ -22,7 +24,7 @@ RUN apt-get install -y -q vim
 RUN apt-get install -y -q nano
 
 # TOOLS
-RUN apt-get install -y -q curl git make wget supervisor unzip
+RUN apt-get install -y -q curl git make wget unzip
 
 # BUILD
 RUN apt-get install -y -q build-essential g++
@@ -34,9 +36,6 @@ RUN apt-get install -y -q golang
 
 ## RUBY
 RUN apt-get install -y -q ruby
-
-## NODE
-RUN apt-get install -y -q nodejs
 
 ## PHP
 RUN apt-get install -y -q php5
@@ -64,21 +63,4 @@ RUN apt-get install libglpk-dev -y
 
 ENV DEBIAN_FRONTEND dialog
 
-RUN \
-  echo "# Install OpenSSH Server" ;\
-  apt-get -q -y install openssh-server ;\
-  mkdir -p /var/run/sshd ;\
-  echo 'root:passw0rd' | chpasswd ;\
-  \
-true
-
-ADD sshd_config /etc/ssh/sshd_config
-RUN cd /home/ && npm install codebox@0.7.6
-ADD package.json /home/node_modules/codebox/node_modules/connect-gzip-static/package.json
-RUN cd /home/node_modules/codebox/node_modules/connect-gzip-static/ && npm install
-RUN mkdir -p /home/myworkspace
-
-RUN mkdir -p /var/log/supervisor
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-CMD ["/usr/bin/supervisord"] 
+CMD ["/usr/local/bin/start"] 
