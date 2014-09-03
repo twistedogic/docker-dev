@@ -24,12 +24,6 @@ RUN apt-get install -y -q curl git make wget supervisor unzip
 
 # BUILD
 RUN apt-get install -y -q build-essential g++
-RUN wget http://www.scala-lang.org/files/archive/scala-2.11.2.deb && dpkg -i scala-2.11.2.deb
-RUN apt-get update -y
-RUN apt-get install scala -y
-wget http://dl.bintray.com/sbt/debian/sbt-0.13.5.deb && dpkg -i sbt-0.13.5.deb 
-RUN apt-get update -y
-RUN apt-get install sbt -y
 
 # LANGS
 
@@ -65,6 +59,13 @@ RUN apt-get install -y openjdk-7-jre-headless
 RUN apt-get install libcurl4-openssl-dev -y
 RUN apt-get install libxml2-dev -y
 RUN apt-get install libglpk-dev -y
+
+RUN wget http://www.scala-lang.org/files/archive/scala-2.11.2.deb && dpkg -i scala-2.11.2.deb
+RUN apt-get update -y
+RUN apt-get install scala -y
+RUN wget http://dl.bintray.com/sbt/debian/sbt-0.13.5.deb && dpkg -i sbt-0.13.5.deb
+RUN apt-get update -y
+RUN apt-get install sbt -y
 
 ENV DEBIAN_FRONTEND dialog
 
