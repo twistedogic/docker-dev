@@ -1,66 +1,23 @@
 ## start with the latest ubuntu
-FROM dustin/r-studio-server
+FROM twistedogic/r
 
 ## That's me
 MAINTAINER twistedogic
 
-RUN echo 'root:passw0rd' | chpasswd
-
 RUN apt-get -y update
-RUN apt-get install -y -q python-software-properties software-properties-common
-#RUN add-apt-repository -y ppa:gophers/go
-# RUN add-apt-repository -y ppa:chris-lea/node.js
-# RUN add-apt-repository -y ppa:webupd8team/java
-# RUN add-apt-repository -y ppa:nginx/stable
-# RUN apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-# RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
-# RUN apt-get -y update
+RUN apt-get install gdebi-core -y
+RUN update-locale
+RUN (wget http://download2.rstudio.org/rstudio-server-0.98.978-amd64.deb && gdebi -n rstudio-server-0.98.978-amd64.deb)
+RUN rm /rstudio-server-0.98.978-amd64.deb
+RUN (adduser --disabled-password --gecos "" guest && echo "guest:guest"|chpasswd)
 
-#SHIMS
-ENV DEBIAN_FRONTEND noninteractive
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# EDITORS
-RUN apt-get install -y -q vim
-RUN apt-get install -y -q nano
-
-# TOOLS
-RUN apt-get install -y -q curl git make wget unzip
-
-# BUILD
-RUN apt-get install -y -q build-essential g++
-
-# LANGS
-
-## GO
-RUN apt-get install -y -q golang
-
-## RUBY
-RUN apt-get install -y -q ruby
-
-## PHP
-RUN apt-get install -y -q php5
-RUN apt-get install -y -q php-pear
-
-## ERLANG
-RUN apt-get install -y -q erlang
-
-## PYTHON
-RUN apt-get install -y -q python-software-properties
-RUN apt-get install -y -q python
-RUN apt-get install -y -q python-dev
-RUN apt-get install -y -q python-distribute
-RUN apt-get install -y -q python-pip
-RUN pip --no-input --exists-action=w install --upgrade pip
-
-# # # JAVA
-# # # Broken
-RUN apt-get install -y openjdk-7-jre-headless
-
-# LIB
 RUN apt-get install libcurl4-openssl-dev -y
 RUN apt-get install libxml2-dev -y
 RUN apt-get install libglpk-dev -y
 
 ENV DEBIAN_FRONTEND dialog
 
-CMD ["/usr/local/bin/start"] 
+EXPOSE 8787 22 7777
+CMD ["/usr/bin/supervisord"] 
