@@ -53,7 +53,7 @@ RUN pip --no-input --exists-action=w install --upgrade pip
 
 # # # JAVA
 # # # Broken
-RUN apt-get install -y openjdk-7-jre-headless
+RUN apt-get install -y openjdk-7-jre-headless openjdk-6-jre
 
 # LIB
 RUN apt-get install libcurl4-openssl-dev -y

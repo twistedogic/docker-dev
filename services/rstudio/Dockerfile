@@ -14,8 +14,7 @@ RUN (adduser --disabled-password --gecos "" guest && echo "guest:guest"|chpasswd
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN apt-get install libcurl4-openssl-dev -y
-RUN apt-get install libxml2-dev -y
-RUN apt-get install libglpk-dev -y
+RUN apt-get install libxml2-dev libglpk-dev libstdc++6 -y
 
 ENV DEBIAN_FRONTEND dialog
 
