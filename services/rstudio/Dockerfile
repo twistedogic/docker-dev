@@ -15,6 +15,8 @@ ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN apt-get install libcurl4-openssl-dev -y
 RUN apt-get install libxml2-dev libglpk-dev libstdc++6 -y
+RUN wget http://download3.rstudio.org/ubuntu-12.04/x86_64/shiny-server-1.2.1.362-amd64.deb && gdebi -n shiny-server-1.2.1.362-amd64.deb
+RUN rm /shiny-server-1.2.1.362-amd64.deb
 
 ENV DEBIAN_FRONTEND dialog
 
