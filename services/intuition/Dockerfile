@@ -26,5 +26,16 @@ RUN \
   \
 true
 
+RUN apt-get -y update
+RUN apt-get install -y -q python-software-properties software-properties-common
+RUN add-apt-repository -y ppa:chris-lea/node.js
+RUN apt-get update -y && apt-get install -y -q nodejs supervisor
+RUN cd /home/ && npm install codebox@0.7.6
+ADD package.json /home/node_modules/codebox/node_modules/connect-gzip-static/package.json
+RUN cd /home/node_modules/codebox/node_modules/connect-gzip-static/ && npm install
+RUN mkdir -p /home/myworkspace
+
+RUN mkdir -p /var/log/supervisor
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD sshd_config /etc/ssh/sshd_config
-CMD ["/usr/sbin/sshd -D"]
+CMD ["/usr/bin/supervisord"]

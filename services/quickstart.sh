@@ -10,3 +10,4 @@ cd ${location}/r && docker build -t twistedogic/r .
 cd ${location}/openscoring && docker build -t twistedogic/openscoring .
 cd ${location}/rstudio && docker build -t twistedogic/rstudio .
 cd ${location}/kali && docker build -t twistedogic/kali .
+cd ${location}/ipython && docker build -t twistedogic/ipython .
