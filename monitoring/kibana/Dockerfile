@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get -y install fuse || true
 RUN rm -rf /var/lib/dpkg/info/fuse.postinst
 RUN apt-get -y install fuse
-RUN apt-get install -y openjdk-7-jre nginx-full supervisor wget
+RUN apt-get install -y openjdk-7-jre nginx-full supervisor wget curl
 
 # Define working directory.
 
@@ -23,16 +23,21 @@ VOLUME ["/data"]
 # Mount elasticsearch.yml config
 ADD ./elasticsearch.yml /elasticsearch/config/elasticsearch.yml
 
-# Define working directory.
-WORKDIR /data
+RUN (cd /tmp && wget --no-check-certificate https://download.elasticsearch.org/logstash/logstash/logstash-1.4.2.tar.gz && tar zxvf logstash-1.4.2.tar.gz && mv logstash-1.4.2 /opt/logstash)
 
 RUN (cd /tmp && wget --no-check-certificate https://download.elasticsearch.org/kibana/kibana/kibana-3.1.1.tar.gz -O pkg.tar.gz && tar zxf pkg.tar.gz && cd kibana-* && cp -rf ./* /usr/share/nginx/html/)
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -rf /tmp/*
 
+ADD ./logstash.conf /opt/logstash/logstash.conf
+
 ADD ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Define working directory.
+WORKDIR /data
 
 EXPOSE 9200
 EXPOSE 9300
+EXPOSE 514
 EXPOSE 80
 CMD ["/usr/bin/supervisord"]
