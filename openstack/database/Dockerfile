@@ -8,6 +8,7 @@ RUN \
   DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server
 
 ADD ./my.cnf /etc/mysql/my.cnf
+ADD ./init.sql /init.sql
 
 RUN \
   echo "mysqld_safe &" > /tmp/config && \
