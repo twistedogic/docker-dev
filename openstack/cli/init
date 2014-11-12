@@ -1,0 +1,76 @@
+#!/bin/bash
+export OS_SERVICE_TOKEN=ADMIN
+export OS_SERVICE_ENDPOINT=http://192.168.100.74:35357/v2.0
+keystone tenant-create --name admin --description "Admin Tenant"
+keystone user-create --name admin --pass ADMIN_PASS --email twistedogic@gmail.com
+keystone role-create --name admin
+keystone user-role-add --tenant admin --user admin --role admin
+keystone role-create --name _member_
+keystone user-role-add --tenant admin --user admin --role _member_
+keystone service-create --name keystone --type identity \
+  --description "OpenStack Identity"
+keystone endpoint-create \
+  --service-id $(keystone service-list | awk '/ identity / {print $2}') \
+  --publicurl http://192.168.100.74:5000/v2.0 \
+  --internalurl http://192.168.100.74:5000/v2.0 \
+  --adminurl http://192.168.100.74:35357/v2.0 \
+  --region regionOne
+
+export OS_TENANT_NAME=admin
+export OS_USERNAME=admin
+export OS_PASSWORD=ADMIN_PASS
+export OS_AUTH_URL=http://192.168.100.74:35357/v2.0
+
+keystone user-create --name glance --pass GLANCE_PASS
+keystone user-role-add --user glance --tenant service --role admin
+keystone service-create --name glance --type image \
+  --description "OpenStack Image Service"
+keystone endpoint-create \
+  --service-id $(keystone service-list | awk '/ image / {print $2}') \
+  --publicurl http://192.168.100.74:9292 \
+  --internalurl http://192.168.100.74:9292 \
+  --adminurl http://192.168.100.74:9292 \
+  --region regionOne
+
+keystone user-create --name nova --pass NOVA_PASS
+keystone user-role-add --user nova --tenant service --role admin
+keystone service-create --name nova --type compute \
+  --description "OpenStack Compute"
+keystone endpoint-create \
+  --service-id $(keystone service-list | awk '/ compute / {print $2}') \
+  --publicurl http://192.168.100.74:8774/v2/%\(tenant_id\)s \
+  --internalurl http://192.168.100.74:8774/v2/%\(tenant_id\)s \
+  --adminurl http://192.168.100.74:8774/v2/%\(tenant_id\)s \
+  --region regionOne
+
+keystone user-create --name neutron --pass NEUTRON_PASS
+keystone user-role-add --user neutron --tenant service --role admin
+keystone service-create --name neutron --type network \
+  --description "OpenStack Networking"
+keystone endpoint-create \
+  --service-id $(keystone service-list | awk '/ network / {print $2}') \
+  --publicurl http://192.168.100.74:9696 \
+  --adminurl http://192.168.100.74:9696 \
+  --internalurl http://192.168.100.74:9696 \
+  --region regionOne
+
+keystone user-create --name cinder --pass CINDER_PASS
+keystone user-role-add --user cinder --tenant service --role admin
+keystone service-create --name cinder --type volume \
+  --description "OpenStack Block Storage"
+keystone endpoint-create \
+  --service-id $(keystone service-list | awk '/ volume / {print $2}') \
+  --publicurl http://192.168.100.74:8776/v1/%\(tenant_id\)s \
+  --internalurl http://192.168.100.74:8776/v1/%\(tenant_id\)s \
+  --adminurl http://192.168.100.74:8776/v1/%\(tenant_id\)s \
+  --region regionOne
+
+keystone service-create --name cinderv2 --type volumev2 \
+  --description "OpenStack Block Storage"
+keystone endpoint-create \
+  --service-id $(keystone service-list | awk '/ volumev2 / {print $2}') \
+  --publicurl http://192.168.100.74:8776/v2/%\(tenant_id\)s \
+  --internalurl http://192.168.100.74:8776/v2/%\(tenant_id\)s \
+  --adminurl http://192.168.100.74:8776/v2/%\(tenant_id\)s \
+  --region regionOne
+
