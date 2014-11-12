@@ -23,4 +23,8 @@ GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'localhost' \
   IDENTIFIED BY 'Root123#';
 GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%' \
   IDENTIFIED BY 'Root123#';
-
+CREATE DATABASE IF NOT EXISTS heat;
+GRANT ALL PRIVILEGES ON heat.* TO 'heat'@'localhost' \
+  IDENTIFIED BY 'Root123#';
+GRANT ALL PRIVILEGES ON heat.* TO 'heat'@'%' \
+  IDENTIFIED BY 'Root123#';
