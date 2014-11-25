@@ -16,5 +16,11 @@ RUN git clone git://github.com/ql-io/ql.io-site.git
 RUN cd ql.io-site && make install
 RUN git clone git://github.com/ql-io/ql.io-template.git
 RUN cd ql.io-template && make install
+VOLUME ["/data"]
+RUN cp -R /ql.io-site/routes /data
+RUN cp -R /ql.io-site/tables /data
+RUN cp -R /ql.io-site/config /data
+ADD ./run.sh /ql.io-template/bin/start.sh
+RUN chmod u+x /ql.io-template/bin/start.sh
 WORKDIR /ql.io-template
 CMD ["bin/start.sh"]
