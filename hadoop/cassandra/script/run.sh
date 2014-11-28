@@ -4,7 +4,7 @@ cd $(dirname $0)
 
 HOW_MANY=${1}
 PREFIX=${2-cass}
-IMAGE=${3-poklet/cassandra}
+IMAGE=${3-twistedogic/cassandra}
 
 if [[ ${#@} = 0 ]]; then
   echo Runs multiple Cassandra containers
@@ -20,6 +20,6 @@ docker run -d --name ${PREFIX}1 $IMAGE
 SEED=$(./ipof.sh ${PREFIX}1)
 
 for (( instance=$HOW_MANY; $instance > 1; instance=$instance - 1 )); do
-	docker run -d --name ${PREFIX}${instance} $IMAGE start $SEED
+	docker run -d --name ${PREFIX}${instance} $IMAGE cassandra-start $SEED
 done
 
