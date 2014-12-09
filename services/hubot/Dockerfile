@@ -12,7 +12,6 @@ WORKDIR /app
 ADD . /app
 
 RUN	chmod 755 bin/hubot 
-ADD	./hubot-scripts.json /app/hubot-scripts.json
 ADD	./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN npm install
 ENV	HUBOT_HIPCHAT_JID [asdfID]@chat.hipchat.com
