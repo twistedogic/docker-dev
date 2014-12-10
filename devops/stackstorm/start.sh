@@ -7,6 +7,7 @@ st2ctl start
 echo "Sleep for 10 seconds while services start..."
 sleep 10
 
+st2ctl reload
 # Validate installation
 st2 run core.local date -a > /dev/null
 ACTIONEXIT=$?
