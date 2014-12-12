@@ -30,3 +30,5 @@ else
   echo ""
   echo "  st2 is installed and ready  "
 fi
+
+/usr/bin/supervisord
