@@ -1,0 +1,31 @@
+[Unit]
+Description=cassandra
+After=docker.service
+Requires=docker.service
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill cassandra
+ExecStartPre=-/usr/bin/docker rm -v cassandra
+ExecStartPre=/usr/bin/docker pull twistedogic/cassandra
+ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+    -p 7199:7199 \
+    -p 7000:7000 \
+    -p 7001:7001 \
+    -p 9160:9160 \
+    -p 9042:9042 \
+    -p 8012:8012 \
+    -p 61621:61621 \
+    --name cassandra \
+    -e SNITCH=GossipingPropertyFileSnitch \
+    -e DC=LHK \
+    -e RACK=r1 \
+    -e SEEDS=192.168.100.78,192.168.100.71,$(/usr/sbin/ip -o -4 addr list ens192 | grep global | awk '{print $4}' | cut -d/ -f1) \
+    -e BROADCAST_ADDRESS=$(/usr/sbin/ip -o -4 addr list ens192 | grep global | awk '{print $4}' | cut -d/ -f1) \
+    twistedogic/cassandra:latest \
+    cassandra-start"
+ExecStop=/usr/bin/docker stop cassandra
+
+[Install]
+WantedBy=multi-user.target

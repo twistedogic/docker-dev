@@ -1,0 +1,20 @@
+[Unit]
+Description=couchbase
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill couchbase
+ExecStartPre=-/usr/bin/docker rm -v couchbase
+ExecStartPre=/usr/bin/docker pull dustin/couchbase
+ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+    --name=couchbase \
+    --net=host \
+    dustin/couchbase"
+ExecStop=/usr/bin/docker stop couchbase
+
+[Install]
+WantedBy=multi-user.target

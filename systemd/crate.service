@@ -1,0 +1,29 @@
+[Unit]
+Description=crate
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill crate
+ExecStartPre=-/usr/bin/docker rm -v crate
+ExecStartPre=/usr/bin/docker pull crate/crate:latest
+ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+    -p 4200:4200 \
+    -p 4300:4300 \
+    --name crate \
+    --env CRATE_HEAP_SIZE=2g \
+    crate/crate:latest \
+    crate \
+    -Des.cluster.name=cratecluster -Des.node.name=$(hostname) \
+    -Des.transport.publish_port=4300 \
+    -Des.network.publish_host=$(ip -o -4 addr list ens192 | grep global | awk '{print $4}' | cut -d/ -f1) \
+    -Des.multicast.enabled=false \
+    -Des.discovery.zen.ping.unicast.hosts='192.168.100.78,192.168.100.79,192.168.100.71' \
+    -Des.discovery.zen.minimum_master_nodes=2"
+ExecStop=/usr/bin/docker stop crate
+
+[Install]
+WantedBy=multi-user.target

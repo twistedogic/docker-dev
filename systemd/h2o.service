@@ -1,0 +1,24 @@
+[Unit]
+Description=h2o
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill h2o
+ExecStartPre=-/usr/bin/docker rm -v h2o
+ExecStartPre=/usr/bin/docker pull twistedogic/h2o-cluster
+ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
+    --name=h2o \
+    --net=host \
+    --privileged \
+    -v /root/h2o:/data \
+    twistedogic/h2o-cluster \
+    java -Xmx1g -jar /opt/h2o-2.8.3.2/h2o.jar -flatfile /data/flatfile.txt -port 54321"
+ExecStop=/usr/bin/docker stop h2o
+
+[Install]
+WantedBy=multi-user.target
+
