@@ -29,5 +29,7 @@ RUN apt-get install -y libopenblas-dev liblapack-dev gfortran && \
 RUN git clone https://github.com/mrjbq7/ta-lib.git && cd ta-lib && python2 setup.py install && python3 setup.py install
 
 RUN apt-get install python-mysqldb -y
+RUN pip2 install redis
+RUN pip3 install redis
 
 CMD ["/notebook.sh"]
