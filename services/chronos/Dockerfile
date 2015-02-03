@@ -11,7 +11,7 @@ RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources
     scala \
     curl git
 
-RUN git clone https://github.com/mesosphere/chronos.git /chronos
+RUN git clone https://github.com/mesos/chronos.git /chronos
 
 WORKDIR /chronos
 
