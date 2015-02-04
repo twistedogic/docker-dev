@@ -13,6 +13,7 @@ ExecStartPre=/usr/bin/docker pull crate/crate:latest
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
     -p 4200:4200 \
     -p 4300:4300 \
+    -v /data \
     --name crate \
     --env CRATE_HEAP_SIZE=2g \
     crate/crate:latest \
@@ -21,7 +22,7 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
     -Des.transport.publish_port=4300 \
     -Des.network.publish_host=$(ip -o -4 addr list ens192 | grep global | awk '{print $4}' | cut -d/ -f1) \
     -Des.multicast.enabled=false \
-    -Des.discovery.zen.ping.unicast.hosts='192.168.100.78,192.168.100.79,192.168.100.71' \
+    -Des.discovery.zen.ping.unicast.hosts='10.0.0.125,10.0.0.126,10.0.0.127' \
     -Des.discovery.zen.minimum_master_nodes=2"
 ExecStop=/usr/bin/docker stop crate
 

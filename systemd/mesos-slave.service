@@ -9,7 +9,7 @@ RestartSec=20
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill mesos_slave
 ExecStartPre=-/usr/bin/docker rm -v mesos_slave
-ExecStartPre=/usr/bin/docker pull mesosphere/mesos-slave:0.20.1
+ExecStartPre=/usr/bin/docker pull mesosphere/mesos-slave:0.21.1-1.1.ubuntu1404
 ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
     --name=mesos_slave \
     --net=host \
@@ -18,10 +18,10 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
     -v /usr/bin/docker:/usr/bin/docker:ro \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /lib64/libdevmapper.so.1.02:/lib/libdevmapper.so.1.02:ro \
-    mesosphere/mesos-slave:0.20.1 \
+    mesosphere/mesos-slave:0.21.1-1.1.ubuntu1404 \
     --ip=$(/usr/sbin/ip -o -4 addr list ens192 | grep global | awk '{print $4}' | cut -d/ -f1) \
     --containerizers=docker \
-    --master=zk://192.168.100.77:2181/mesos \
+    --master=zk://10.0.0.125:2181/mesos \
     --work_dir=/var/lib/mesos/slave \
     --log_dir=/var/log/mesos/slave \
     --resources='ports:[3000-65535]'"
