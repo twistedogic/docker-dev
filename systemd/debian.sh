@@ -1,0 +1,33 @@
+localip=$(ip -o -4 addr list eth0 | grep global | awk '{print $4}' | cut -d/ -f1)
+docker run --net=host --name=zookeeper jplock/zookeeper
+docker run \
+    --name=mesos_master \
+    --privileged \
+    --net=host \
+    mesosphere/mesos-master:0.21.1-1.1.ubuntu1404 \
+    --ip=${localip} \
+    --zk=zk://${localip}:2181/mesos \
+    --work_dir=/var/lib/mesos/master \
+    --quorum=1
+sleep 10000
+docker run \
+    --name=mesos_slave \
+    --net=host \
+    --privileged \
+    -v /sys:/sys \
+    -v /usr/bin/docker:/usr/bin/docker:ro \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /lib64/libdevmapper.so.1.02:/lib/libdevmapper.so.1.02:ro \
+    mesosphere/mesos-slave:0.21.1-1.1.ubuntu1404 \
+    --ip=${localip} \
+    --containerizers=docker \
+    --master=zk://${localip}:2181/mesos \
+    --work_dir=/var/lib/mesos/slave \
+    --log_dir=/var/log/mesos/slave
+docker run \
+    --name chronos \
+    -p 8081:8081 \
+    twistedogic/chronos:latest \
+    --master zk://${localip}:2181/mesos \
+    --zk_hosts ${localip}:2181 \
+    --http_port 8081
