@@ -1,6 +1,7 @@
 localip=$(ip -o -4 addr list eth0 | grep global | awk '{print $4}' | cut -d/ -f1)
-docker run --net=host --name=zookeeper jplock/zookeeper
-docker run \
+docker run --net=host -d --name=zookeeper jplock/zookeeper
+sleep 10
+docker run -d \
     --name=mesos_master \
     --privileged \
     --net=host \
@@ -9,8 +10,8 @@ docker run \
     --zk=zk://${localip}:2181/mesos \
     --work_dir=/var/lib/mesos/master \
     --quorum=1
-sleep 10000
-docker run \
+sleep 10
+docker run -d \
     --name=mesos_slave \
     --net=host \
     --privileged \
@@ -24,7 +25,7 @@ docker run \
     --master=zk://${localip}:2181/mesos \
     --work_dir=/var/lib/mesos/slave \
     --log_dir=/var/log/mesos/slave
-docker run \
+docker run -d \
     --name chronos \
     -p 8081:8081 \
     twistedogic/chronos:latest \
