@@ -37,7 +37,7 @@ docker run -d \
     --master zk://${localip}:2181/mesos \
     --zk_hosts ${localip}:2181 \
     --http_port 8081
-docker run \
+docker run -d \
     --name marathon \
     -e LIBPROCESS_PORT=9090 \
     -p 8080:8080 \
