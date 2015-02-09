@@ -1,4 +1,9 @@
-localip=$(ip -o -4 addr list eth0 | grep global | awk '{print $4}' | cut -d/ -f1)
+if [ -z "$1" ]
+  then
+    echo "No argument supplied"
+    exit 1
+fi
+localip=$(ip -o -4 addr list $1 | grep global | awk '{print $4}' | cut -d/ -f1)
 docker run --net=host -d --name=zookeeper jplock/zookeeper
 sleep 10
 docker run -d \
