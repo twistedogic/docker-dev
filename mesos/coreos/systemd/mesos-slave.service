@@ -19,9 +19,9 @@ ExecStart=/usr/bin/sh -c "/usr/bin/docker run \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /lib64/libdevmapper.so.1.02:/lib/libdevmapper.so.1.02:ro \
     mesosphere/mesos-slave:0.21.1-1.1.ubuntu1404 \
-    --ip=$(/usr/sbin/ip -o -4 addr list ens192 | grep global | awk '{print $4}' | cut -d/ -f1) \
+    --ip=<LOCAL_IP> \
     --containerizers=docker \
-    --master=zk://10.0.0.125:2181/mesos \
+    --master=zk://<ZK_IP>:2181/mesos \
     --work_dir=/var/lib/mesos/slave \
     --log_dir=/var/log/mesos/slave \
     --resources='ports:[3000-65535]'"
