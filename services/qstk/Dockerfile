@@ -11,3 +11,4 @@ RUN tar -xzf QSTK-0.2.8.tar.gz
 RUN sh QSTK-0.2.8/UbuntuInstallation.sh
 RUN cd QSTK-0.2.8 && python setup.py install
 
+WORKDIR /notebooks
