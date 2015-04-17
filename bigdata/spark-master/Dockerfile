@@ -1,6 +1,10 @@
-FROM errordeveloper/weave-spark-base-minimal
+# Spark
+FROM twistedogic/spark-base
+MAINTAINER amplab amp-docker@eecs.berkeley.edu
 
-ADD start.sh /start.sh
-RUN chmod u+x /start.sh
-ENTRYPOINT ["/bin/bash"]
-CMD ["/start.sh"]
+# Expose TCP ports 7077 8080
+EXPOSE 7077 8080
+
+ADD files /root/spark_master_files
+
+CMD ["/root/spark_master_files/default_cmd"]
