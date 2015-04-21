@@ -1,6 +1,9 @@
 #!/bin/bash -x
 systemctl stop firewalld.service
 systemctl mask firewalld.service
+systemctl stop docker.service
+systemctl disable docker.service
+cp -rf docker.service /etc/systemd/system
 yum install bridge-utils policycoreutils-python -y
 curl --silent --location --output /usr/sbin/weave https://github.com/zettio/weave/releases/download/latest_release/weave
 chmod +x /usr/sbin/weave
@@ -18,7 +21,8 @@ echo "PEERS=
 BRIDGE_CIDR=${BRIDGE_CIDR}" | tee /etc/sysconfig/weave > /dev/null
 weave create-bridge
 weave expose ${BRIDGE_CIDR}
-systemctl restart docker
+systemctl enable docker.service
+systemctl start docker.service
 cp -rf weave.service /etc/systemd/system
 systemctl enable weave.service
 systemctl start weave.service
