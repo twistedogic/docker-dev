@@ -14,7 +14,8 @@ echo "# /etc/sysconfig/docker
 
 # Modify these options if you want to change the way the docker daemon runs 
 DOCKER_NETWORK_OPTIONS=--bridge=weave --fixed-cidr=${NETWORK_CIDR}" | tee /etc/sysconfig/docker-network > /dev/null
-echo "PEERS=" | tee /etc/sysconfig/weave > /dev/null
+echo "PEERS=
+BRIDGE_CIDR=${BRIDGE_CIDR}" | tee /etc/sysconfig/weave > /dev/null
 weave create-bridge
 weave expose ${BRIDGE_CIDR}
 systemctl restart docker
