@@ -1,7 +1,7 @@
 [Unit]
 Description=Chronos
-After=docker.service
-Requires=docker.service
+After=weave.service
+Requires=weave.service
 
 [Service]
 Restart=on-failure

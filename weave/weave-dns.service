@@ -1,0 +1,13 @@
+[Unit]
+Description=Weave DNS
+Documentation=http://zettio.github.io/weave/
+Requires=weave.service
+After=weave.service
+[Service]
+EnvironmentFile=-/etc/sysconfig/weave
+ExecStartPre=/usr/sbin/weave launch-dns
+ExecStart=/usr/bin/docker logs -f weave-dns
+SuccessExitStatus=2
+ExecStop=/usr/sbin/weave stop-dns
+[Install]
+WantedBy=multi-user.target

@@ -1,7 +1,7 @@
 [Unit]
 Description=MesosMaster
-After=docker.service
-Requires=docker.service
+After=zookeeper.service
+Requires=zookeeper.service
 
 [Service]
 Restart=on-failure

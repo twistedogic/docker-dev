@@ -1,0 +1,13 @@
+[Unit]
+Description=Weave Network
+Documentation=http://zettio.github.io/weave/
+Requires=docker.service
+After=docker.service
+[Service]
+EnvironmentFile=-/etc/sysconfig/weave
+ExecStartPre=/usr/sbin/weave launch $PEERS
+ExecStart=/usr/bin/docker logs -f weave
+SuccessExitStatus=2
+ExecStop=/usr/sbin/weave stop
+[Install]
+WantedBy=multi-user.target
