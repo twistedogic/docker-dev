@@ -21,6 +21,8 @@ echo "PEERS=
 BRIDGE_CIDR=${BRIDGE_CIDR}" | tee /etc/sysconfig/weave > /dev/null
 weave create-bridge
 weave expose ${BRIDGE_CIDR}
+systemctl enable docker.socket
+systemctl start docker.socket
 systemctl enable docker.service
 systemctl start docker.service
 cp -rf weave.service /etc/systemd/system
