@@ -1,0 +1,16 @@
+{
+  "id": "restcommander",
+  "cpus": 1,
+  "mem": 1024,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/restcommander",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 9000, "hostPort": 0, "servicePort": 9000, "protocol": "tcp" }
+      ]
+    }
+  }
+}

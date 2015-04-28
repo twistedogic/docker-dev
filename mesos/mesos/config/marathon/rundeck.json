@@ -1,0 +1,19 @@
+{
+  "id": "rundeck",
+  "cpus": 1,
+  "mem": 512,
+  "env": {
+    "SERVER_URL":"http://10.0.0.114:4440"
+  },
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "jordan/rundeck:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 4440, "hostPort": 0, "servicePort": 4440, "protocol": "tcp" }
+      ]
+    }
+  }
+}

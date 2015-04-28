@@ -1,0 +1,18 @@
+{
+  "id": "web",
+  "cpus": 1,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/apache-php",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 80, "hostPort": 0, "servicePort": 80, "protocol": "tcp" },
+        { "containerPort": 443, "hostPort": 0, "servicePort": 443, "protocol": "tcp" },
+        { "containerPort": 22, "hostPort": 0, "servicePort": 1022, "protocol": "tcp" }
+      ]
+    }
+  }
+}

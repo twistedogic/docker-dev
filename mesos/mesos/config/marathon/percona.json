@@ -1,0 +1,16 @@
+{
+  "id": "percona",
+  "cpus": 1,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "dockerfile/percona",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 3306, "hostPort": 0, "servicePort": 3306, "protocol": "tcp" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "nimbus",
+  "cpus": 2,
+  "mem": 512,
+  "instances": 1,
+  "cmd":"/start.sh 10.0.0.114",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mattf/storm-nimbus",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 6627, "hostPort": 0, "servicePort": 6627, "protocol": "tcp" }
+      ]
+    }
+  }
+}

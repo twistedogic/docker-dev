@@ -1,0 +1,16 @@
+{
+  "id": "zookeeper",
+  "cpus": 1,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mattf/zookeeper",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 2181, "hostPort": 0, "servicePort": 2181, "protocol": "tcp" }
+      ]
+    }
+  }
+}

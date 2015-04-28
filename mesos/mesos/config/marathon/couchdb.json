@@ -1,0 +1,16 @@
+{
+  "id": "couchdb",
+  "cpus": 1,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "klaemo/couchdb",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 5984, "hostPort": 0, "servicePort": 5984, "protocol": "tcp" }
+      ]
+    }
+  }
+}

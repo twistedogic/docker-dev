@@ -1,0 +1,23 @@
+{
+  "id": "cachet",
+  "cpus": 1,
+  "mem": 512,
+  "env": {
+  	"DB_HOST":"10.0.0.114",
+  	"DB_USERNAME":"cachet",
+	"DB_PASSWORD":"cachet",
+	"DB_ROOT_PASSWORD":"cachet",
+	"DB_DATABASE":"cachet"
+  },
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cachethq/cachet:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8000, "hostPort": 0, "servicePort": 8000, "protocol": "tcp" }
+      ]
+    }
+  }
+}

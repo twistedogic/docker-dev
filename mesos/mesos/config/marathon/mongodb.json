@@ -1,0 +1,17 @@
+{
+  "id": "mongodb",
+  "cpus": 1,
+  "mem": 1024,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mongo:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 27017, "hostPort": 0, "servicePort": 27017, "protocol": "tcp" },
+        { "containerPort": 28017, "hostPort": 0, "servicePort": 28017, "protocol": "tcp" }
+      ]
+    }
+  }
+}

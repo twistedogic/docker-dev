@@ -1,0 +1,20 @@
+{
+  "id": "libreboard",
+  "cpus": 0.5,
+  "mem": 512,
+  "instances": 1,
+  "env": {
+  	"MONGO_URL": "mongodb://10.0.0.114:27017/libreboard",
+  	"ROOT_URL": "http://example.com"
+  },
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "ncarlier/libreboard",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 30000, "hostPort": 30000 , "servicePort": 9999, "protocol": "tcp" }
+      ]
+    }
+  }
+}

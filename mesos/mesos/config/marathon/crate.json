@@ -1,0 +1,16 @@
+{
+  "id": "crate",
+  "cpus": 2,
+  "mem": 1024,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "crate",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 4200, "hostPort": 0, "servicePort": 4200, "protocol": "tcp" }
+      ]
+    }
+  }
+}

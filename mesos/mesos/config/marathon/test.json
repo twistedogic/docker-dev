@@ -1,0 +1,20 @@
+{
+  "id": "test",
+  "cpus": 0.5,
+  "mem": 128,
+  "instances": 1,
+  "env": {
+  	"THE_MESSAGE": "hi"
+  },
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "rastasheep/ubuntu-sshd:14.04",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 22, "hostPort": 0, "servicePort": 2022, "protocol": "tcp" }
+      ],
+      "parameters":{ "key": "hostname", "value": "a.corp.org" }
+    }
+  }
+}

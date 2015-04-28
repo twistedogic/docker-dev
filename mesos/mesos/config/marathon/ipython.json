@@ -1,0 +1,17 @@
+{
+  "id": "ipython",
+  "cpus": 1,
+  "mem": 1024,
+  "instances": 1,
+  "cmd":"ipython notebook --no-browser --port 8888 --ip=*",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/ipython",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8888, "hostPort": 0, "servicePort": 8989, "protocol": "tcp" }
+      ]
+    }
+  }
+}

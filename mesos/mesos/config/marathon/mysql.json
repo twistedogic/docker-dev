@@ -1,0 +1,22 @@
+{
+  "id": "mysql",
+  "cpus": 1,
+  "mem": 512,
+  "env": {
+    "MYSQL_USER":"cachet",
+    "MYSQL_PASSWORD":"cachet",
+    "MYSQL_ROOT_PASSWORD":"cachet",
+    "MYSQL_DATABASE":"cachet"
+  },
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mysql:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 3306, "hostPort": 0, "servicePort": 3306, "protocol": "tcp" }
+      ]
+    }
+  }
+}

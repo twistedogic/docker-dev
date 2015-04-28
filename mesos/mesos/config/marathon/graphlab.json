@@ -1,0 +1,16 @@
+{
+  "id": "graphlab",
+  "cpus": 2,
+  "mem": 2048,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/graphlab:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8888, "hostPort": 0, "servicePort": 8888, "protocol": "tcp" }
+      ]
+    }
+  }
+}

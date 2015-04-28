@@ -1,0 +1,20 @@
+{
+  "id": "storm-worker",
+  "cpus": 1,
+  "mem": 512,
+  "instances": 1,
+  "cmd":"/start.sh 10.0.0.114 10.0.0.114",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mattf/storm-worker",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 6700, "hostPort": 0, "servicePort": 6700, "protocol": "tcp" },
+        { "containerPort": 6701, "hostPort": 0, "servicePort": 6701, "protocol": "tcp" },
+        { "containerPort": 6702, "hostPort": 0, "servicePort": 6702, "protocol": "tcp" },
+        { "containerPort": 6703, "hostPort": 0, "servicePort": 6703, "protocol": "tcp" }
+      ]
+    }
+  }
+}
