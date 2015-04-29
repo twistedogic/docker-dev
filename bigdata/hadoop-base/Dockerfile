@@ -24,8 +24,5 @@ ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 RUN		mkdir -p ${HADOOP_INSTALL_DIR} && \
 		curl -L --silent  http://www.eu.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | tar -xz --strip=1 -C ${HADOOP_INSTALL_DIR}
 
-WORKDIR		${HADOOP_INSTALL_DIR}
-RUN sed -i s/"files dns"/"dns files"/ /etc/nsswitch.conf
+WORKDIR		/etc/hadoop
 
-# add Hadoop config file templates
-ADD files /root/hadoop_files
