@@ -1,0 +1,16 @@
+{
+  "id": "ambari-agent",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/ambari-base",
+      "privileged": true,
+      "network": "BRIDGE"
+    }
+  },
+  "instances": 4,
+  "cpus": 0.5,
+  "mem": 2048,
+  "uris": [],
+  "ports": []
+}

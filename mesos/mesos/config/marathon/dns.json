@@ -1,0 +1,30 @@
+{
+  "id": "dns",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/docker-ddns",
+      "privileged": true,
+      "network": "HOST"
+    },
+    "volumes": [
+      {
+        "containerPath": "/var/run/docker.sock",
+        "hostPath": "/var/run/docker.sock",
+        "mode": "RO"
+      }
+    ]
+  },
+  "instances": 3,
+  "cpus": 0.2,
+  "mem": 512,
+  "uris": [],
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "ports": []
+}
+

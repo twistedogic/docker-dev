@@ -1,0 +1,16 @@
+{
+  "id": "ambari-server",
+  "cpus": 1,
+  "mem": 1024,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/ambari-server",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 0, "servicePort": 8080, "protocol": "tcp" }
+      ]
+    }
+  }
+}
