@@ -32,5 +32,6 @@ if (argv.dns){
                 console.log(stderr);
             }
         });
+        setInterval(function(){ console.log('alive') }, 86400000);
     }
 }
