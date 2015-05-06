@@ -1,0 +1,7 @@
+{
+  "event_handlers": [
+    "member-join=$SERF_HOME/bin/dnsmasq.sh",
+    "member-failed=$SERF_HOME/bin/dnsmasq.sh",
+    "member-leave=$SERF_HOME/bin/dnsmasq.sh"
+  ]
+}

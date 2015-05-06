@@ -5,7 +5,7 @@ RUN apt-get update -y
 RUN apt-get install -y sudo tar wget openjdk-7-jre-headless supervisor
 RUN \
   echo "# Install OpenSSH Server" ;\
-  apt-get install -y openssh-server openssh-clients;\
+  apt-get install -y openssh-server;\
   mkdir -p /var/run/sshd ;\
   echo 'root:passw0rd' | chpasswd ;\
   \

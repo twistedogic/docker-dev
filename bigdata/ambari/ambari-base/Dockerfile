@@ -20,6 +20,6 @@ RUN wget -nv http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.0
 RUN yum update -y
 RUN yum -y install python-setuptools python-meld3 && yum clean all
 RUN easy_install pip && pip install supervisor
-
+RUN pip install distribute --upgrade
 CMD /usr/sbin/sshd -D
 EXPOSE 8080 22
