@@ -3,17 +3,10 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "twistedogic/docker-ddns",
+      "image": "twistedogic/serf-dns",
       "privileged": true,
       "network": "HOST"
-    },
-    "volumes": [
-      {
-        "containerPath": "/var/run/docker.sock",
-        "hostPath": "/var/run/docker.sock",
-        "mode": "RO"
-      }
-    ]
+    }
   },
   "instances": 3,
   "cpus": 0.2,

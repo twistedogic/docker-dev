@@ -3,7 +3,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "twistedogic/ambari-base",
+      "image": "twistedogic/ambari-serf",
       "privileged": true,
       "network": "BRIDGE"
     }
@@ -12,5 +12,7 @@
   "cpus": 0.5,
   "mem": 2048,
   "uris": [],
-  "ports": []
+  "env": {
+    "SERF_JOIN_IP": "10.0.0.129"
+  }
 }
