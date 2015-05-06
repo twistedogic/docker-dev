@@ -13,7 +13,6 @@ COPY serf_init.sh $SERF_HOME/bin/serf_init.sh
 RUN chmod +x $SERF_HOME/bin/*
 
 COPY supervisord.conf /etc/supervisord.conf
-RUN yum install ambari-agent -y 
 
 EXPOSE 22
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
