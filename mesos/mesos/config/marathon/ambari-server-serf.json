@@ -1,0 +1,21 @@
+{
+  "id": "ambari-server-serf",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/ambari-server-serf",
+      "privileged": true,
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 0, "servicePort": 8080, "protocol": "tcp" }
+      ]
+    }
+  },
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 1024,
+  "uris": [],
+  "env": {
+    "SERF_JOIN_IP": "10.0.0.129"
+  }
+}
