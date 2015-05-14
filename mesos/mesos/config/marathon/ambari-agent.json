@@ -8,8 +8,8 @@
       "network": "BRIDGE"
     }
   },
-  "instances": 4,
-  "cpus": 0.5,
+  "instances": 3,
+  "cpus": 1,
   "mem": 2048,
   "uris": [],
   "env": {

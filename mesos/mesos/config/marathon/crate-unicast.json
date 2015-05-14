@@ -21,7 +21,7 @@
   "uris": [],
   "cmd": "crate -Des.cluster.name=mesos-unicast -Des.zen.discovery.minimum_master_nodes=2",
   "env": {
-    "CRATE_HOSTS": "10.0.0.129:4300,10.0.0.130:4300,10.0.0.131:4300",
+    "CRATE_HOSTS": "10.0.0.127:4300,10.0.0.130:4300,10.0.0.131:4300",
     "CRATE_HEAP_SIZE": "1024m"
   },
   "constraints": [
