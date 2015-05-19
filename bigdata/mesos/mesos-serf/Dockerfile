@@ -1,6 +1,9 @@
 FROM mesosphere/mesos:0.21.1-1.1.ubuntu1404
 MAINTAINER Jordan Li
 
+ENV SERF_HOME /root/serf
+RUN mkdir $SERF_HOME && mkdir $SERF_HOME/bin && mkdir $SERF_HOME/etc
+
 RUN apt-get update && apt-get install -y wget supervisor unzip
 
 RUN wget https://dl.bintray.com/mitchellh/serf/0.6.4_linux_amd64.zip -P /tmp

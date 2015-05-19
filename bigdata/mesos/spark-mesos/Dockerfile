@@ -21,6 +21,6 @@ RUN \
   echo 'root:passw0rd' | chpasswd ;\
   \
 true
-
+ADD sshd_config /etc/ssh/sshd_config
 ADD supervisord.conf /etc/supervisord.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
