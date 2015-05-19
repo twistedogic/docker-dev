@@ -23,4 +23,5 @@ RUN \
 true
 ADD sshd_config /etc/ssh/sshd_config
 ADD supervisord.conf /etc/supervisord.conf
+ADD start-shell.sh /start-shell.sh
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
