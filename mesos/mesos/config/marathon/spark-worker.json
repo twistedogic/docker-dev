@@ -1,0 +1,18 @@
+{
+  "id": "spark-worker",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/spark-worker:latest",
+      "network": "BRIDGE"
+    }
+  },
+  "instances": 2,
+  "cpus": 0.5,
+  "mem": 2048,
+  "uris": [],
+  "env": {
+    "SERF_JOIN_IP": "10.0.0.129",
+    "MASTER_IP": "10.0.0.114"
+  }
+}

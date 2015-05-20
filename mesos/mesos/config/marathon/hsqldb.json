@@ -1,0 +1,16 @@
+{
+  "id": "hsqldb",
+  "cpus": 1,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "springxd/hsqldb:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 9101, "hostPort": 0, "servicePort": 9101, "protocol": "tcp" }
+      ]
+    }
+  }
+}

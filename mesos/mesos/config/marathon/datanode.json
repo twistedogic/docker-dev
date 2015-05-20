@@ -1,0 +1,14 @@
+{
+  "id": "datanode",
+  "cpus": 0.5,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/datanode:latest",
+      "network": "BRIDGE"
+    },
+    "args":["10.100.93.29"]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "springxd-container",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "springxd/container:latest",
+      "network": "BRIDGE"
+    }
+  },
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 1024,
+  "uris": [],
+  "env": {
+    "HSQLDB_PORT_9101_TCP_ADDR":"10.0.0.114",
+    "HSQLDB_PORT_9101_TCP_PORT":"9101",
+    "ZOOKEEPER_PORT_2181_TCP_ADDR":"10.0.0.114",
+    "ZOOKEEPER_PORT_2181_TCP_PORT":"2181",
+    "REDIS_PORT_6379_TCP_ADDR":"10.0.0.114",
+    "REDIS_PORT_6379_TCP_PORT":"6379"
+  }
+}
