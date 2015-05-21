@@ -1,0 +1,54 @@
+{
+  "id": "/spark",
+  "groups": [
+    {
+      "id": "/spark/master",
+      "apps": [
+        {
+          "id": "mesos-master-serf",
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/mesos-master-serf:latest",
+              "network": "BRIDGE",
+              "portMappings": [
+                { "containerPort": 5050, "hostPort": 0, "servicePort": 5050, "protocol": "tcp" }
+              ]
+            }
+          },
+          "instances": 1,
+          "cpus": 0.5,
+          "mem": 1024,
+          "uris": [],
+          "env": {
+            "SERF_JOIN_IP": "10.0.0.129",
+            "ZK_IP": "10.0.0.114"
+          }
+        }
+      ]
+    },{
+      "id": "/spark/worker",
+      "dependencies": ["/spark/master"],
+      "apps": [
+        {
+          "id": "mesos-slave-serf",
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/mesos-slave-serf:latest",
+              "network": "BRIDGE"
+            }
+          },
+          "instances": 2,
+          "cpus": 0.5,
+          "mem": 1024,
+          "uris": [],
+          "env": {
+            "SERF_JOIN_IP": "10.0.0.129",
+            "ZK_IP": "10.0.0.114"
+          }
+        }
+      ]
+    }
+  ]
+}

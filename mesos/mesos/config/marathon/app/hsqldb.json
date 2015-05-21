@@ -1,7 +1,7 @@
 {
   "id": "hsqldb",
   "cpus": 1,
-  "mem": 512,
+  "mem": 2048,
   "instances": 1,
   "container": {
     "type": "DOCKER",

@@ -1,0 +1,55 @@
+{
+  "id": "/hdfs",
+  "groups": [
+    {
+      "id": "/hdfs/namenode",
+      "apps": [
+        { 
+          "id": "namenode",
+          "cpus": 0.5,
+          "mem": 1024,
+          "instances": 1,
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/namenode:latest",
+              "network": "HOST"
+            }
+          },
+          "constraints": [
+            [
+              "hostname",
+              "CLUSTER",
+              "10.0.0.127"
+            ]
+          ]
+        }
+       ]
+    },{
+      "id": "/hdfs/datanode",
+      "dependencies": ["/hdfs/namenode"],
+      "apps": [
+        {
+          "id": "datanode",
+          "cpus": 0.5,
+          "mem": 512,
+          "instances": 2,
+          "args":["10.0.0.127"],
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/datanode:latest",
+              "network": "BRIDGE"
+            }
+          },
+          "constraints": [
+            [
+              "hostname",
+              "UNIQUE"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

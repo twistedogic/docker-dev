@@ -3,12 +3,18 @@
   "cpus": 0.5,
   "mem": 512,
   "instances": 1,
+  "args":["10.0.0.127"],
   "container": {
     "type": "DOCKER",
     "docker": {
       "image": "twistedogic/datanode:latest",
       "network": "BRIDGE"
-    },
-    "args":["10.100.93.29"]
-  }
+    }
+  },
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ]
 }

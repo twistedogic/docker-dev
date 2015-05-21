@@ -1,0 +1,21 @@
+{
+  "id": "namenode",
+  "cpus": 0.5,
+  "mem": 1024,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/namenode:latest",
+      "network": "HOST"
+    }
+  },
+  "constraints": [
+    [
+      "hostname",
+      "CLUSTER",
+      "10.0.0.127"
+    ]
+  ]
+
+}
