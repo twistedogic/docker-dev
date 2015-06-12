@@ -1,0 +1,22 @@
+{
+  "id": "pyspark-mesos",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/pyspark-mesos:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 22, "hostPort": 0, "servicePort": 1022, "protocol": "tcp" },
+        { "containerPort": 8888, "hostPort": 0, "servicePort": 8888, "protocol": "tcp" }
+      ]
+    }
+  },
+  "instances": 1,
+  "cpus": 2,
+  "mem": 2048,
+  "uris": [],
+  "env": {
+    "SERF_JOIN_IP": "10.0.0.129",
+    "PYSPARK_SUBMIT_ARGS":"--master mesos://zk://10.0.0.114:2181/mesos --conf spark.executor.uri=http://d3kbcqa49mib13.cloudfront.net/spark-1.3.1-bin-hadoop2.6.tgz"
+  }
+}

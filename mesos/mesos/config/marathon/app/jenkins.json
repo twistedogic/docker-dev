@@ -1,0 +1,12 @@
+{
+	"id": "jenkins",
+	"instances": 1,
+	"mem": 1500,
+	"env": {
+		"JAVA_OPTS": "-Xmx300m"
+   },
+   "uris": [
+      "https://s3.amazonaws.com/downloads.mesosphere.io/jenkins/test/0.6.0/jenkins-on-mesos.tgz"
+   ],
+   "cmd": "cd jenkins-on-mesos && export JENKINS_HOME=$(pwd) && java $JAVA_OPTS -jar jenkins.war --httpPort=$PORT0"
+}
