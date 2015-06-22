@@ -1,0 +1,21 @@
+{
+  "id": "sentry",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "slafs/sentry:7.4",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 9000, "hostPort": 0, "servicePort": 80, "protocol": "tcp" }
+      ]
+    }
+  },
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 1024,
+  "uris": [],
+  "env": {
+    	"SENTRY_URL_PREFIX":"http://10.0.0.114",
+	"SECRET_KEY":"randomvalue"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "rethinkdb",
+  "cpus": 0.5,
+  "mem": 512,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "rethinkdb:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 0, "servicePort": 8081, "protocol": "tcp" }
+      ]
+    }
+  }
+}

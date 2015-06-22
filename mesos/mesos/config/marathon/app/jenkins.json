@@ -1,12 +1,20 @@
 {
-	"id": "jenkins",
-	"instances": 1,
-	"mem": 1500,
-	"env": {
-		"JAVA_OPTS": "-Xmx300m"
-   },
-   "uris": [
-      "https://s3.amazonaws.com/downloads.mesosphere.io/jenkins/test/0.6.0/jenkins-on-mesos.tgz"
-   ],
-   "cmd": "cd jenkins-on-mesos && export JENKINS_HOME=$(pwd) && java $JAVA_OPTS -jar jenkins.war --httpPort=$PORT0"
+  "id": "jenkins-dind",
+  "cpus": 1,
+  "mem": 1024,
+  "instances": 1,
+  "env": {
+    "PORT":"4243"
+  },
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "killercentury/jenkins-dind:latest",
+      "network": "BRIDGE",
+      "privileged": true,
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 0, "servicePort": 8080, "protocol": "tcp" }
+      ]
+    }
+  }
 }
