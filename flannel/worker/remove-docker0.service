@@ -1,6 +1,6 @@
 [Unit]
 Description=remove-docker0
-After=etcd.service
+After=docker-bootstrap.service
 Before=flannel.service
 
 [Service]

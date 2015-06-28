@@ -1,7 +1,7 @@
 [Unit]
 Description=flanneld
-After=etcd-setup.service
-Requires=etcd-setup.service
+After=docker-bootstrap.service
+Requires=docker-bootstrap.service
 
 [Service]
 Restart=on-failure
