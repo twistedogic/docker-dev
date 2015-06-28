@@ -1,0 +1,22 @@
+[Unit]
+Description=flanneld
+After=etcd-setup.service
+Requires=etcd-setup.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker -H unix:///var/run/docker-bootstrap.sock kill flanneld
+ExecStartPre=-/usr/bin/docker -H unix:///var/run/docker-bootstrap.sock rm -v flanneld
+ExecStart=/usr/bin/docker -H unix:///var/run/docker-bootstrap.sock run \
+	-name=flanneld \
+	--net=host \
+	--privileged \
+	-v /dev/net:/dev/net \
+	quay.io/coreos/flannel:0.3.0 \
+	/opt/bin/flanneld --etcd-endpoints=http://MASTERIP:4001
+ExecStop=/usr/bin/docker -H unix:///var/run/docker-bootstrap.sock stop flanneld
+
+[Install]
+WantedBy=multi-user.target

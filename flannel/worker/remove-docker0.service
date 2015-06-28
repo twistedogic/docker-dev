@@ -1,0 +1,11 @@
+[Unit]
+Description=remove-docker0
+After=etcd.service
+Before=flannel.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/sbin/ifconfig docker0 down
+ExecStart=/usr/sbin/brctl delbr docker0
+[Install]
+WantedBy=multi-user.target
