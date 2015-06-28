@@ -1,7 +1,7 @@
 [Unit]
 Description=kube-proxy
-After=weave.service
-Requires=weave.service
+After=docker.service
+Requires=docker.service
 
 [Service]
 Restart=on-failure
@@ -9,12 +9,12 @@ RestartSec=20
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill kube-proxy
 ExecStartPre=-/usr/bin/docker rm -v kube-proxy
-ExecStartPre=/usr/bin/docker pull gcr.io/google_containers/hyperkube:v0.15.0
+ExecStartPre=/usr/bin/docker pull gcr.io/google_containers/hyperkube:v0.18.2
 ExecStart=/usr/bin/docker run \
-	-name kube-proxy
+	--name kube-proxy
 	--net=host \
 	--privileged \
-	gcr.io/google_containers/hyperkube:v0.15.0 /hyperkube proxy \
+	gcr.io/google_containers/hyperkube:v0.18.2 /hyperkube proxy \
 	--master=http://127.0.0.1:8080 \
 	--v=2
 ExecStop=/usr/bin/docker stop kube-proxy

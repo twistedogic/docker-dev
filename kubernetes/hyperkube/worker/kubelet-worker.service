@@ -9,17 +9,17 @@ RestartSec=20
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill kube
 ExecStartPre=-/usr/bin/docker rm -v kube
-ExecStartPre=/usr/bin/docker pull gcr.io/google_containers/hyperkube:v0.15.0
+ExecStartPre=/usr/bin/docker pull gcr.io/google_containers/hyperkube:v0.18.2
 ExecStart=/usr/bin/docker run \
-	-name kube
+	--name kube
 	--net=host 
 	-v /var/run/docker.sock:/var/run/docker.sock 
-	gcr.io/google_containers/hyperkube:v0.15.0 /hyperkube kube 
-	--api_servers=http://${MASTER_IP}:8080 
+	gcr.io/google_containers/hyperkube:v0.18.2 /hyperkube kube 
+	--api_servers=http://MASTERIP:8080 
 	--v=2 
 	--address=0.0.0.0 
 	--enable_server 
-	--hostname_override=$(hostname -i)
+	--hostname_override=$(hostname)
 ExecStop=/usr/bin/docker stop kube
 
 [Install]
