@@ -2,6 +2,7 @@
 Description=Docker Application Container Engine
 Documentation=http://docs.docker.com
 After=flanneld-setup.service
+Require=flanneld.service
 
 [Service]
 Type=notify
@@ -16,7 +17,7 @@ ExecStart=/usr/bin/docker -d $OPTIONS \
           $ADD_REGISTRY \
           $BLOCK_REGISTRY \
           $INSECURE_REGISTRY \
-          --bip=${FLANNEL_SUBNET} --mtu=${FLANNEL_MTU}
+          --bip=${FLANNEL_SUBNET} --mtu=${FLANNEL_MTU} --storage-opt dm.no_warn_on_loop_devices=true
 LimitNOFILE=1048576
 LimitNPROC=1048576
 LimitCORE=infinity

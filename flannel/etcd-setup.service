@@ -5,6 +5,7 @@ Before=flannel.service
 
 [Service]
 Type=oneshot
+ExecStartPre=/bin/sh -c "sleep 5"
 ExecStart=/usr/bin/docker -H unix:///var/run/docker-bootstrap.sock run \
 	--rm \
 	--net=host gcr.io/google_containers/etcd:2.0.9 \

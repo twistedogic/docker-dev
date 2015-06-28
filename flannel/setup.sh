@@ -1,7 +1,9 @@
 cp -rf *.service /etc/systemd/system
-systemd enable docker-bootstrap.service
-systemd enable etcd-setup.service
-systemd enable flanneld-setup.service
-systemd enable docker.service
-systemd enable etcd.service
-systemd enable flanneld.service
+systemctl enable docker-bootstrap.service
+systemctl enable etcd-setup.service
+systemctl enable flanneld-setup.service
+systemctl enable docker.service
+systemctl enable etcd.service
+systemctl enable flanneld.service
+systemctl enable remove-docker0.service
+systemctl daemon-reload
