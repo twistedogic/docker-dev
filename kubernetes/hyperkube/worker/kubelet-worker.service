@@ -1,7 +1,7 @@
 [Unit]
 Description=kube
-After=weave.service
-Requires=weave.service
+After=docker.service
+Requires=docker.service
 
 [Service]
 Restart=on-failure

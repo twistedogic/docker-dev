@@ -1,7 +1,7 @@
 [Unit]
 Description=kube-proxy
-After=weave.service
-Requires=weave.service
+After=kubelet-worker.service
+Requires=kubelet-worker.service
 
 [Service]
 Restart=on-failure
