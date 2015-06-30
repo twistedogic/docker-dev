@@ -1,0 +1,22 @@
+{
+  "id": "codebox",
+  "cpus": 2,
+  "mem": 4096,
+  "args": ["/workspace -p 7777 -u nonroot:Root123#"],
+  "instances": 1,
+  "env": {
+    "PORT":"7777"
+  },
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/codebox:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 35729, "hostPort": 0, "servicePort": 35729, "protocol": "tcp" },
+        { "containerPort": 7777, "hostPort": 0, "servicePort": 7777, "protocol": "tcp" },
+        { "containerPort": 3001, "hostPort": 0, "servicePort": 3001, "protocol": "tcp" }	
+      ]
+    }
+  }
+}

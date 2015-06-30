@@ -1,0 +1,30 @@
+{
+  "id": "kubelet",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "gcr.io/google_containers/hyperkube:v0.18.2",
+      "privileged": true,
+      "network": "HOST"
+    },
+    "volumes": [
+      {
+        "containerPath": "/var/run/docker.sock",
+        "hostPath": "/var/run/docker.sock",
+        "mode": "RW"
+      }
+    ]
+  },
+  "instances": 3,
+  "cpus": 1,
+  "mem": 1024,
+  "uris": [],
+  "cmd": "/hyperkube kubelet --api_servers=http://10.0.0.129:8080 --v=2 --address=0.0.0.0 --enable_server --hostname_override=$HOST",
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "ports": []
+}
