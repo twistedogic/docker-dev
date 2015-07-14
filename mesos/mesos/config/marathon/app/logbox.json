@@ -1,0 +1,17 @@
+{
+  "id": "logbox",
+  "cpus": 1,
+  "mem": 2048,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "sirile/minilogbox:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 9200, "hostPort": 0, "servicePort": 9200, "protocol": "tcp" },
+        { "containerPort": 5000, "hostPort": 0, "servicePort": 5000, "protocol": "udp" }
+      ]
+    }
+  }
+}

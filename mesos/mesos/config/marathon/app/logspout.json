@@ -1,0 +1,39 @@
+{
+  "id": "logspout",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "gliderlabs/logspout:latest",
+      "privileged": true
+    },
+    "volumes": [
+      {
+        "containerPath": "/etc/localtime",
+        "hostPath": "/etc/localtime",
+        "mode": "RO"
+      },
+      {
+        "containerPath": "/etc/timezone",
+        "hostPath": "/etc/timezone",
+        "mode": "RO"
+      },
+      {
+        "containerPath": "/tmp/docker.sock",
+        "hostPath": "/var/run/docker.sock",
+        "mode": "RW"
+      }
+    ]
+  },
+  "instances": 3,
+  "cpus": 0.5,
+  "mem": 512,
+  "uris": [],
+  "args": ["syslog://10.0.0.114:5000"],
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "ports": []
+}
