@@ -3,7 +3,7 @@
   "cpus": 1,
   "mem": 512,
   "env": {
-    "ELASTICSEARCH_URL":"http://10.0.0.114:9200"
+    "ELASTICSEARCH_URL":"http://10.0.0.129:9200"
   },
   "instances": 1,
   "container": {
