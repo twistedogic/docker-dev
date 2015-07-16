@@ -28,7 +28,7 @@
   "cpus": 0.5,
   "mem": 512,
   "uris": [],
-  "args": ["syslog://10.0.0.129:5000"],
+  "args": ["syslog://10.0.0.124:5000"],
   "constraints": [
     [
       "hostname",

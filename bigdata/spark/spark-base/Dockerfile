@@ -27,5 +27,7 @@ RUN wget --no-check-certificate https://dl.bintray.com/mitchellh/serf/0.6.4_linu
 RUN unzip /tmp/0.6.4_linux_amd64.zip -d $SERF_HOME/bin && rm -f /tmp/0.6.4_linux_amd64.zip
 
 COPY serf_init.sh $SERF_HOME/bin/serf_init.sh
+COPY updatehosts.json $SERF_HOME/etc/updatehosts.json
+COPY updatehosts.sh $SERF_HOME/bin/updatehosts.sh
 RUN chmod +x $SERF_HOME/bin/*
 

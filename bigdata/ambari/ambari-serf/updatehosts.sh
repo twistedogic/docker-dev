@@ -1,13 +1,14 @@
 #!/bin/bash
-
+if [ ! -f /tmp/hosts.orig ]; then
+    cp -rf /etc/hosts /tmp/hosts.orig
+fi
+echo "$(cat /tmp/hosts.orig)" > temp
 $SERF_HOME/bin/serf members -status=alive | while read line ;do
   NEXT_HOST=$(echo $line|cut -d' ' -f 1)
   NEXT_SHORT=${NEXT_HOST%%.*}
   NEXT_ADDR=$(echo $line|cut -d' ' -f 2)
   NEXT_IP=${NEXT_ADDR%%:*}
-  echo address=\"/$NEXT_HOST/$NEXT_SHORT/$NEXT_IP\"
-  IFS='.' read A B C D <<< "$NEXT_IP"
-  echo ptr-record=$D.$C.$B.$A.in-addr.arpa,$NEXT_HOST
-done > /etc/dnsmasq.d/0hosts
-
-service dnsmasq restart
+  echo "$NEXT_IP        $NEXT_SHORT"
+done >> temp
+echo "$(cat temp)" > /etc/hosts
+rm -rf temp

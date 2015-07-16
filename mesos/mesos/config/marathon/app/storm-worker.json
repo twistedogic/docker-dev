@@ -7,7 +7,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "mattf/storm-worker",
+      "image": "twistedogic/storm-node-worker",
       "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 6700, "hostPort": 0, "servicePort": 6700, "protocol": "tcp" },

@@ -1,0 +1,99 @@
+{
+  "id": "/storm",
+  "groups": [
+    {
+      "id": "/storm/zookeeper",
+      "apps": [
+        {
+          "id": "zookeeper",
+          "cpus": 1,
+          "mem": 512,
+          "instances": 1,
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "mattf/zookeeper",
+              "network": "BRIDGE",
+              "portMappings": [
+                { "containerPort": 2181, "hostPort": 0, "servicePort": 2181, "protocol": "tcp" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "/storm/nimbus",
+      "dependencies": ["/storm/zookeeper"],
+      "apps": [
+        {
+          "id": "nimbus",
+          "cpus": 1,
+          "mem": 512,
+          "instances": 1,
+          "cmd":"/start.sh 10.0.0.114",
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/storm-node-nimbus",
+              "network": "BRIDGE",
+              "portMappings": [
+                { "containerPort": 6627, "hostPort": 0, "servicePort": 6627, "protocol": "tcp" },
+                { "containerPort": 3772, "hostPort": 0, "servicePort": 3772, "protocol": "tcp" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "/storm/ui",
+      "dependencies": ["/storm/nimbus"],
+      "apps": [
+        {
+          "id": "storm-ui",
+          "cpus": 1,
+          "mem": 512,
+          "instances": 1,
+          "cmd":"/start.sh 10.0.0.114 10.0.0.114",
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/storm-node-ui",
+              "network": "BRIDGE",
+              "portMappings": [
+                { "containerPort": 8080, "hostPort": 0, "servicePort": 8080, "protocol": "tcp" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "/storm/worker",
+      "dependencies": ["/storm/nimbus"],
+      "apps": [
+        {
+          "id": "storm-worker",
+          "cpus": 0.2,
+          "mem": 512,
+          "instances": 1,
+          "cmd":"/start.sh 10.0.0.114 10.0.0.114",
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/storm-node-worker",
+              "network": "BRIDGE",
+              "portMappings": [
+                { "containerPort": 6700, "hostPort": 0, "servicePort": 6700, "protocol": "tcp" },
+                { "containerPort": 6701, "hostPort": 0, "servicePort": 6701, "protocol": "tcp" },
+                { "containerPort": 6702, "hostPort": 0, "servicePort": 6702, "protocol": "tcp" },
+                { "containerPort": 6703, "hostPort": 0, "servicePort": 6703, "protocol": "tcp" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
