@@ -1,4 +1,5 @@
-FROM twistedogic/hadoop-base
+FROM twistedogic/spark-hdfs-base
+MAINTAINER Jordan Li
 
 ENV     HDFS_NAMENODE_ROOT_DIR /var/hdfs/namenode
 
@@ -13,8 +14,8 @@ VOLUME		["/var/hdfs/namenode"]
 # TCP	50070	dfs.namenode.http-address	HTTP connector
 # TCP	50470	dfs.namenode.https-address	HTTPS connector
 
-EXPOSE 8020 50070 50470
+COPY start.sh /
+COPY supervisord.conf /etc/supervisord.conf
 
-ENTRYPOINT ["/usr/local/sbin/docker-entrypoint.sh"]
-
-CMD ["bin/hdfs", "namenode"]
+EXPOSE 7077 8080 8020 50070 50470
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

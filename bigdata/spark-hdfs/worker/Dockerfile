@@ -1,4 +1,5 @@
-FROM twistedogic/hadoop-base
+FROM twistedogic/spark-hdfs-base
+MAINTAINER Jordan Li
 
 ENV     HDFS_DATANODE_ROOT_DIR /var/hdfs/datanode
 
@@ -17,6 +18,7 @@ VOLUME		["/var/hdfs/datanode"]
 
 EXPOSE 50010 50020 50075 50475
 
-ENTRYPOINT ["/usr/local/sbin/docker-entrypoint.sh"]
+COPY start.sh /
+COPY supervisord.conf /etc/supervisord.conf
 
-CMD ["bin/hdfs", "datanode"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
