@@ -12,8 +12,10 @@ WORKDIR /app
 ADD . /app
 
 RUN	chmod 755 bin/hubot 
+ADD	start-hubot /start-hubot
 ADD	./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN npm install
 ENV	HUBOT_HIPCHAT_JID [asdfID]@chat.hipchat.com
 ENV	HUBOT_HIPCHAT_PASSWORD [your-password]
+ENV	HUBOT_ADAPTER hipchat
 CMD	supervisord -n

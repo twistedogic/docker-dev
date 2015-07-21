@@ -1,0 +1,2 @@
+#!/bin/bash
+/app/bin/hubot --name hubot --adapter $HUBOT_ADAPTER
