@@ -1,0 +1,25 @@
+{
+  "id": "hubot",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/hubot:latest",
+      "privileged": true
+    },
+    "volumes": [
+      {
+        "containerPath": "/var/run/docker.sock",
+        "hostPath": "/var/run/docker.sock",
+        "mode": "RW"
+      }
+    ]
+  },
+  "instances": 1,
+  "cpus": 0.2,
+  "mem": 512,
+  "ports": [],
+  "env": {
+  	"HUBOT_SLACK_TOKEN":"xoxb-7822468161-PMI67sXru8hB4Es00ioMxVsr",
+	"HUBOT_ADAPTER":"slack"
+  }
+}

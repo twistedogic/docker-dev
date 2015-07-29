@@ -1,0 +1,34 @@
+{
+  "id": "container-exporter",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "prom/container-exporter:latest",
+      "privileged": true,
+      "network": "HOST"
+    },
+    "volumes": [
+      {
+        "containerPath": "/cgroup",
+        "hostPath": "/sys/fs/cgroup",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/var/run/docker.sock",
+        "hostPath": "/var/run/docker.sock",
+        "mode": "RW"
+      }
+    ]
+  },
+  "instances": 3,
+  "cpus": 0.2,
+  "mem": 512,
+  "uris": [],
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "ports": []
+}

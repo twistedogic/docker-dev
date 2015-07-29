@@ -1,0 +1,44 @@
+{
+  "id": "cadvisor",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "google/cadvisor:0.16.0",
+      "privileged": true,
+      "network": "HOST"
+    },
+    "volumes": [
+      {
+        "containerPath": "/rootfs",
+        "hostPath": "/",
+        "mode": "RO"
+      },
+      {
+        "containerPath": "/var/run",
+        "hostPath": "/var/run",
+        "mode": "RW"
+      },
+      {
+        "containerPath": "/sys",
+        "hostPath": "/sys",
+        "mode": "RO"
+      },
+      {
+        "containerPath": "/var/lib/docker",
+        "hostPath": "/var/lib/docker",
+        "mode": "RO"
+      }
+    ]
+  },
+  "instances": 3,
+  "cpus": 0.2,
+  "mem": 512,
+  "uris": [],
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "ports": []
+}
