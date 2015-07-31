@@ -22,7 +22,7 @@ RUN rm /scala-$SCALA_VERSION.tgz
 # Install Spark
 RUN wget "${SPARK_DOWNLOAD_URL}" -P /
 RUN (cd / && gunzip < ${SPARK_TGZ}.tgz)|(cd /opt && tar -xvf -)
-RUN (ln -s /opt/${SPARK_TGZ} /opt/spark-$SPARK_VERSION && rm /${SPARK_TGZ.tgz)
+RUN (ln -s /opt/${SPARK_TGZ} /opt/spark-$SPARK_VERSION && rm /${SPARK_TGZ}.tgz)
 
 # Install Serf
 RUN wget --no-check-certificate https://dl.bintray.com/mitchellh/serf/0.6.4_linux_amd64.zip -P /tmp
