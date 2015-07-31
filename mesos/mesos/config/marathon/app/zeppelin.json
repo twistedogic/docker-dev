@@ -1,0 +1,23 @@
+{
+  "id": "zeppelin",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "twistedogic/zeppelin:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8080, "hostPort": 0, "servicePort": 8080, "protocol": "tcp" },
+        { "containerPort": 8081, "hostPort": 0, "servicePort": 8081, "protocol": "tcp" }
+      ]
+    }
+  },
+  "instances": 1,
+  "cpus": 0.5,
+  "mem": 2048,
+  "uris": [],
+  "env": {
+    "SERF_JOIN_IP": "10.0.0.129",
+    "MASTER": "mesos://zk://10.0.0.114:2181/mesos",
+    "ZEPPELIN_JAVA_OPTS":"-Dspark.executor.uri=http://d3kbcqa49mib13.cloudfront.net/spark-1.4.1-bin-hadoop2.6.tgz"
+  }
+}

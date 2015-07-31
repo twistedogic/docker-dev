@@ -1,12 +1,12 @@
 {
   "id": "h2o",
-  "cpus": 1,
-  "mem": 2048,
+  "cpus": 2,
+  "mem": 4096,
   "instances": 1,
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "twistedogic/h2o",
+      "image": "twistedogic/h2o-base:latest",
       "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 54321, "hostPort": 0, "servicePort": 54321, "protocol": "tcp" },

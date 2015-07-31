@@ -1,8 +1,0 @@
-{
-    "check": {
-        "id": "cpu-util",
-        "name": "CPU utilization",
-        "script": "/usr/local/bin/cpu.sh -w 30 -c 80",
-        "interval": "10s"
-    }
-}
