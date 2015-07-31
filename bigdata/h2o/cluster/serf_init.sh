@@ -13,3 +13,5 @@ SERF_LOG_FILE=/var/log/serf.log
 EOF
 
 $SERF_BIN agent -config-dir $SERF_CONFIG_DIR $@ | tee -a $SERF_LOG_FILE
+sleep 20
+java $1 -jar /opt/h2o-${H2O_VERSION}/h2o.jar -flatfile /opt/flatfile.txt -port 54321
