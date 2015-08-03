@@ -1,0 +1,55 @@
+{
+  "id": "/spark",
+  "groups": [
+    {
+      "id": "/spark/master",
+      "apps": [
+        {
+          "id": "spark-master",
+          "cpus": 1,
+          "mem": 2048,
+          "instances": 1,
+          "env": {
+            "SERF_JOIN_IP": "10.0.0.129"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/spark-master:latest",
+              "network": "HOST"
+            }
+          },
+          "constraints": [
+            [
+              "hostname",
+              "CLUSTER",
+              "10.0.0.131"
+            ]
+          ]
+        }
+       ]
+    },{
+      "id": "/spark/worker",
+      "dependencies": ["/master"],
+      "apps": [
+        {
+          "id": "spark-worker",
+          "cpus": 0.5,
+          "mem": 512,
+          "instances": 1,
+          "env": {
+            "SERF_JOIN_IP": "10.0.0.129",
+            "MASTER_IP":"10.0.0.127"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/spark-worker:latest",
+              "network": "BRIDGE"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

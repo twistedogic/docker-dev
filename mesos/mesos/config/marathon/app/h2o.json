@@ -9,11 +9,7 @@
       "image": "twistedogic/h2o-base:latest",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 54321, "hostPort": 0, "servicePort": 54321, "protocol": "tcp" },
-        { "containerPort": 7777, "hostPort": 0, "servicePort": 7777, "protocol": "tcp" },
-        { "containerPort": 8787, "hostPort": 0, "servicePort": 8787, "protocol": "tcp" },
-        { "containerPort": 3001, "hostPort": 0, "servicePort": 3001, "protocol": "tcp" },	
-        { "containerPort": 22, "hostPort": 0, "servicePort": 1022, "protocol": "tcp" }	
+        { "containerPort": 54321, "hostPort": 0, "servicePort": 54321, "protocol": "tcp" }
       ]
     }
   }
