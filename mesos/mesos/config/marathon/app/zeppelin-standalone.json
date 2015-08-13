@@ -6,7 +6,7 @@
       "image": "twistedogic/zeppelin:latest",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 8080, "hostPort": 0, "servicePort": 8080, "protocol": "tcp" },
+        { "containerPort": 8080, "hostPort": 0, "servicePort": 8083, "protocol": "tcp" },
         { "containerPort": 8081, "hostPort": 0, "servicePort": 8081, "protocol": "tcp" }
       ]
     }

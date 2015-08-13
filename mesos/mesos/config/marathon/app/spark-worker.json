@@ -3,16 +3,22 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "twistedogic/spark-worker:latest",
+      "image": "twistedogic/spark-hdfs-worker:latest",
       "network": "BRIDGE"
     }
   },
-  "instances": 2,
+  "instances": 1,
   "cpus": 0.5,
   "mem": 2048,
   "uris": [],
   "env": {
     "SERF_JOIN_IP": "10.0.0.129",
-    "MASTER_IP": "10.0.0.114"
-  }
+    "MASTER_UI": "10.0.0.114:8080"
+  },
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ]
 }

@@ -1,0 +1,56 @@
+{
+  "id": "/spark",
+  "groups": [
+    {
+      "id": "/spark/master",
+      "apps": [
+        {
+          "id": "spark-hdfs-master",
+          "cpus": 1,
+          "mem": 2048,
+          "instances": 1,
+          "env": {
+            "SERF_JOIN_IP": "10.0.0.129"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/spark-hdfs-master:latest",
+              "network": "HOST"
+            }
+          },
+          "constraints": [
+            [
+              "hostname",
+              "CLUSTER",
+              "10.0.0.131"
+            ]
+          ]
+        }
+       ]
+    },{
+      "id": "/spark/worker",
+      "dependencies": ["/master"],
+      "apps": [
+        {
+          "id": "spark-hdfs-worker",
+          "cpus": 0.5,
+          "mem": 1024,
+          "instances": 1,
+          "env": {
+            "SERF_JOIN_IP": "10.0.0.129",
+            "MASTER_UI":"10.0.0.131:8080"
+          },
+          "container": {
+            "type": "DOCKER",
+            "docker": {
+              "image": "twistedogic/spark-hdfs-worker:latest",
+              "network": "BRIDGE"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+

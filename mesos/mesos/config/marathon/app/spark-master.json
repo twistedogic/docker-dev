@@ -3,7 +3,7 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "twistedogic/spark-master:latest",
+      "image": "twistedogic/spark-hdfs-master:latest",
       "network": "BRIDGE",
       "portMappings": [
         { "containerPort": 8080, "hostPort": 0, "servicePort": 8080, "protocol": "tcp" }

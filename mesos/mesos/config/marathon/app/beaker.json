@@ -1,0 +1,16 @@
+{
+  "id": "beaker",
+  "cpus": 2,
+  "mem": 2048,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "beakernotebook/beaker:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8800, "hostPort": 0, "servicePort": 8800, "protocol": "tcp" }
+      ]
+    }
+  }
+}
