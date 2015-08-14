@@ -14,9 +14,9 @@ RUN curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_V
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 RUN git clone https://github.com/spark-jobserver/spark-jobserver.git /tmp/spark-jobserver && \ 
     cd /tmp/spark-jobserver && \
-    sbt job-server/assembly && \
-    mkdir -p $SPARK_SERVER_HOME && \
-    cp /tmp/spark-jobserver/job-server/target/spark-job-server.jar $SPARK_SERVER_HOME && \
+    sbt job-server/assembly
+RUN mkdir -p $SPARK_SERVER_HOME && \
+    cp /tmp/spark-jobserver/job-server/target/scala-2.10/spark-job-server.jar $SPARK_SERVER_HOME && \
     rm -rf /tmp/spark-jobserver
 ADD ./conf $SPARK_SERVER_HOME
 ADD supervisord.conf /etc/supervisord.conf
