@@ -1,0 +1,30 @@
+{
+  "id": "couchdb-pro",
+  "cpus": 1,
+  "mem": 2048,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "klaemo/couchdb",
+      "privileged": true,
+      "network": "HOST"
+    },
+    "volumes": [
+      {
+        "containerPath": "/usr/local/var/lib/couchdb",
+        "hostPath": "/data/couchdb",
+        "mode": "RW"
+      }
+    ]
+
+  },
+  "constraints": [
+    [
+      "hostname",
+      "CLUSTER",
+      "10.0.0.130"
+    ]
+  ]
+
+}

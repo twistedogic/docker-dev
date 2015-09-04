@@ -1,0 +1,22 @@
+{
+  "id": "mongodb-cluster",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mongo:3",
+      "network": "HOST"
+    }
+  },
+  "instances": 3,
+  "cpus": 0.5,
+  "mem": 2048,
+  "uris": [],
+  "args": ["--smallfiles","--replSet","rs0"],
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "ports": []
+}

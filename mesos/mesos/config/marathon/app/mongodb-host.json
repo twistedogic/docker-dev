@@ -1,0 +1,30 @@
+{
+  "id": "mongodb-cluster-host",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "mongo:3",
+      "privileged": true,
+      "network": "HOST"
+    },
+    "volumes": [
+      {
+        "containerPath": "/data/db",
+        "hostPath": "/data/mongo",
+        "mode": "RW"
+      }
+    ]
+  },
+  "instances": 3,
+  "cpus": 0.5,
+  "mem": 2048,
+  "uris": [],
+  "args": ["--smallfiles","--replSet","rs0"],
+  "constraints": [
+    [
+      "hostname",
+      "UNIQUE"
+    ]
+  ],
+  "ports": []
+}
