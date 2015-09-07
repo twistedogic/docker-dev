@@ -1,0 +1,23 @@
+[Unit]
+Description=logbox
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill logbox
+ExecStartPre=-/usr/bin/docker rm -v logbox
+ExecStartPre=-/usr/bin/docker pull sirile/minilogbox:latest
+ExecStart=/usr/bin/docker run \
+    --name logbox \
+    -m 2048m \
+    -p 5000:5000/udp \
+    -p 9200:9200 \
+    sirile/minilogbox
+ExecStop=/usr/bin/docker stop logbox
+
+[Install]
+WantedBy=multi-user.target
+

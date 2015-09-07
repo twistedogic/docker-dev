@@ -1,0 +1,11 @@
+[Unit]
+Description=flanneld-setup
+After=flanneld.service
+Requires=flanneld.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "sleep 5 && /usr/bin/docker -H unix:///var/run/docker-bootstrap.sock exec $(docker -H unix:///var/run/docker-bootstrap.sock ps -a | grep flanneld |awk '{print $1}') cat /run/flannel/subnet.env > /etc/sysconfig/flannelsubnet"
+
+[Install]
+WantedBy=multi-user.target

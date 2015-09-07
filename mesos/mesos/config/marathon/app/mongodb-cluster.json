@@ -3,8 +3,12 @@
   "container": {
     "type": "DOCKER",
     "docker": {
-      "image": "mongo:3",
-      "network": "HOST"
+      "image": "twistedogic/mongo:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 27017, "hostPort": 0 , "servicePort": 27017, "protocol": "tcp" }
+      ]
+
     }
   },
   "instances": 3,

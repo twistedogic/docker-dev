@@ -1,0 +1,24 @@
+[Unit]
+Description=etcd
+After=docker-bootstrap.service
+Requires=docker-bootstrap.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker -H unix:///var/run/docker-bootstrap.sock kill etcd
+ExecStartPre=-/usr/bin/docker -H unix:///var/run/docker-bootstrap.sock rm -v etcd
+ExecStart=/usr/bin/docker -H unix:///var/run/docker-bootstrap.sock run \
+	--name=etcd \
+	--privileged \
+	--net=host \
+	gcr.io/google_containers/etcd:2.0.9 \
+	/usr/local/bin/etcd \
+	--addr=127.0.0.1:4001 \
+	--bind-addr=0.0.0.0:4001 \
+	--data-dir=/var/etcd/data
+ExecStop=/usr/bin/docker stop etcd
+
+[Install]
+WantedBy=multi-user.target

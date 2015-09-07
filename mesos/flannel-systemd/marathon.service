@@ -1,0 +1,27 @@
+[Unit]
+Description=Marathon
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill marathon
+ExecStartPre=-/usr/bin/docker rm -v marathon
+ExecStart=/usr/bin/docker run \
+    --name marathon \
+    -m 1024m \
+    -e LIBPROCESS_PORT=9090 \
+    -p 8081:8080 \
+    -p 9090:9090 \
+    mesosphere/marathon:v0.7.6 \
+    --master zk://10.0.0.129:2181/mesos \
+    --zk zk://10.0.0.129:2181/marathon \
+    --checkpoint \
+    --task_launch_timeout 300000
+ExecStop=/usr/bin/docker stop marathon
+
+[Install]
+WantedBy=multi-user.target
+

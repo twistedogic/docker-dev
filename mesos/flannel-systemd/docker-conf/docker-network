@@ -1,0 +1,3 @@
+# /etc/sysconfig/docker-network
+# Modify these options if you want to change the way the docker daemon runs
+DOCKER_NETWORK_OPTIONS=""
