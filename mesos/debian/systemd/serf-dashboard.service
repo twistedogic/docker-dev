@@ -1,0 +1,23 @@
+[Unit]
+Description=serf-dashboard
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill dashboard
+ExecStartPre=-/usr/bin/docker rm -v dashboard
+ExecStartPre=-/usr/bin/docker pull twistedogic/serf-httpd:latest
+ExecStart=/usr/bin/docker run \
+    --name dashboard \
+    -m 256m \
+    --net=host \
+    --privileged \
+    twistedogic/serf-httpd
+ExecStop=/usr/bin/docker stop dashboard
+
+[Install]
+WantedBy=multi-user.target
+

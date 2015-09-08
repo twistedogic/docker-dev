@@ -1,0 +1,19 @@
+[Unit]
+Description=Docker Application Container Engine
+Documentation=http://docs.docker.com
+After=flanneld-setup.service
+Require=flanneld.service
+
+[Service]
+Type=notify
+EnvironmentFile=-/opt/flannelsubnet
+EnvironmentFile=-/etc/default/docker
+ExecStart=/usr/bin/docker -d -H fd:// $DOCKER_OPTS \
+          --bip=${FLANNEL_SUBNET} --mtu=${FLANNEL_MTU}
+LimitNOFILE=1048576
+LimitNPROC=1048576
+LimitCORE=infinity
+MountFlags=slave
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,26 @@
+[Unit]
+Description=MesosMaster
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=on-failure
+RestartSec=20
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker rm -v mesos_master
+ExecStartPre=/usr/bin/docker pull mesosphere/mesos-master:0.21.1-1.1.ubuntu1404
+ExecStart=/usr/bin/docker run \
+    --name=mesos_master \
+    -m 512m \
+    --privileged \
+    --net=host \
+    mesosphere/mesos-master:0.21.1-1.1.ubuntu1404 \
+    --ip=10.130.44.128 \
+    --zk=zk://10.130.44.128:2181/mesos \
+    --work_dir=/var/lib/mesos/master \
+    --quorum=1
+ExecStop=/usr/bin/docker stop mesos_master
+
+[Install]
+WantedBy=multi-user.target
+
