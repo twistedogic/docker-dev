@@ -1,6 +1,10 @@
 {
   "id": "chronos",
-  "cmd": "/chronos/bin/start-chronos.bash --master zk://10.0.0.129:2181/mesos --zk_hosts 10.0.0.129:2181 --http_port 8081",
+  "args": [
+    "--master","zk://10.0.0.129:2181/mesos",
+    "--zk_hosts","10.0.0.129:2181",
+    "--http_port","4040"
+  ],
   "cpus": 1,
   "mem": 1024,
   "instances": 1,
@@ -10,7 +14,7 @@
       "image": "twistedogic/chronos:latest",
       "network": "BRIDGE",
       "portMappings": [
-        { "containerPort": 8081, "hostPort": 0, "servicePort": 8081, "protocol": "tcp" }
+        { "containerPort": 4040, "hostPort": 0, "servicePort": 4040, "protocol": "tcp" }
       ]
     }
   }

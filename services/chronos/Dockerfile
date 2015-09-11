@@ -1,22 +1,11 @@
-FROM ubuntu:trusty
-
-RUN echo "deb http://repos.mesosphere.io/ubuntu/ trusty main" > /etc/apt/sources.list.d/mesosphere.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF && \
-    apt-get update && \
-    apt-get install -y maven \
-    node \
-    npm \
-    default-jdk \
-    mesos \
-    scala \
-    curl git
-
-RUN git clone https://github.com/mesos/chronos.git /chronos
-
-WORKDIR /chronos
-
-RUN mvn clean package
-
-EXPOSE 8081
-
+FROM mesosphere/mesos:0.21.1-1.1.ubuntu1404
+MAINTAINER Jordan Li
+ENV CHRONOS_VERSION 2.4.0
+RUN apt-get update && apt-get -y install curl maven npm wget && apt-get clean all
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+RUN cd /opt && wget https://github.com/mesos/chronos/archive/$CHRONOS_VERSION.tar.gz && tar -zxvf $CHRONOS_VERSION.tar.gz
+RUN cd /opt/chronos-$CHRONOS_VERSION && mvn clean package
+RUN ln -s /opt/chronos-$CHRONOS_VERSION /opt/chronos
+WORKDIR /opt/chronos
 ENTRYPOINT ["bin/start-chronos.bash"]
+

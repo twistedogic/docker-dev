@@ -1,10 +1,10 @@
 { 
 	"schedule" : "R5/2015-09-11T09:27:00.000Z/PT10M",  
 	"epsilon" : "PT10M",  
-	"name" : "ECHO_DATE_DOCKER",
+	"name" : "test_fail",
 	"container": {
    	"type": "DOCKER",
-   	"image": "busybox:latest"
+   	"image": "busy"
  	},
  	"environmentVariables": [
         {

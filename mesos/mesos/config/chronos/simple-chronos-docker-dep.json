@@ -1,7 +1,10 @@
 { 
-	"schedule" : "R5/2015-09-11T09:27:00.000Z/PT10M",  
-	"epsilon" : "PT10M",  
-	"name" : "ECHO_DATE_DOCKER",
+	"parents": [
+    	"ECHO_DATE_DOCKER"
+  	],
+  	"retries": 2,
+        "epsilon" : "PT10M",  
+	"name" : "docker_dep",
 	"container": {
    	"type": "DOCKER",
    	"image": "busybox:latest"
@@ -18,7 +21,7 @@
         ],
         "cpus": "0.5",
  	"mem": "256",   
-	"command" : "echo start now $(date) && sleep 300 && echo end now $(data)",  
+	"command" : "date",  
 	"owner" : "chronos-user@example.com",  
 	"async" : false 
 }

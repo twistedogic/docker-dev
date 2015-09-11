@@ -5,4 +5,4 @@ if [ "$#" -ne 1 ]; then
 	exit 1;
 fi
 
-curl -i -L -H 'Content-Type: application/json' -X POST -d@"$@"  10.57.6.157:4400/scheduler/dependency
+curl -i -L -H 'Content-Type: application/json' -X POST -d@"$@"  10.0.0.114:4040/scheduler/dependency
