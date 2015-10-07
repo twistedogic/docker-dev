@@ -1,0 +1,21 @@
+{
+  "id": "kairosdb",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "wangdrew/kairosdb:latest",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 8083, "hostPort": 0, "servicePort": 8080, "protocol": "tcp" },
+        { "containerPort": 4242, "hostPort": 0, "servicePort": 4242, "protocol": "tcp" }
+      ]
+    }
+  },
+  "instances": 1,
+  "cpus": 1,
+  "mem": 2048,
+  "uris": [],
+  "env":{
+    "CASSANDRA_HOST_LIST":"10.0.0.114:9160"
+  }
+}

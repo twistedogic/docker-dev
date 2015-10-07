@@ -1,0 +1,17 @@
+{
+  "id": "cassandra-node",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cassandra:2.0.16",
+      "network": "BRIDGE"
+    }
+  },
+  "instances": 1,
+  "cpus": 1,
+  "mem": 2048,
+  "uris": [],
+  "env": {
+    "CASSANDRA_SEEDS":"10.1.23.8"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "cassandra-seed",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "cassandra:2.0.16",
+      "network": "BRIDGE",
+      "portMappings": [
+        { "containerPort": 9160, "hostPort": 0, "servicePort": 9160, "protocol": "tcp" },
+        { "containerPort": 9042, "hostPort": 0, "servicePort": 9042, "protocol": "tcp" }
+      ]
+    }
+  },
+  "instances": 1,
+  "cpus": 1,
+  "mem": 2048,
+  "uris": []
+}
