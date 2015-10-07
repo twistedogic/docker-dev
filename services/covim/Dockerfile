@@ -32,6 +32,8 @@ RUN git clone https://github.com/VundleVim/Vundle.vim.git /root/.vim/bundle/Vund
 ADD tmux.conf /root/.tmux.conf
 ADD vimrc /root/.vimrc
 ADD vimrc.bundles /root/.vimrc.bundles
+# add nodejs to PATH as tmux reload default bash profile
+ADD profile /etc/profile
 RUN echo "vim +PluginInstall +qall" > /root/vimsetup
 
 EXPOSE 22
