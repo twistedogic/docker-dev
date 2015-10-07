@@ -1,8 +1,10 @@
-FROM google/nodejs:latest
+FROM google/debian:wheezy
 MAINTAINER Jordan Li
 ENV HOME /root
 RUN apt-get update -y && apt-get install -y build-essential ruby python python-pip python-dev ctags \
     ssh curl wget make mercurial libxpm-dev libx11-dev libxt-dev ncurses-dev git tmux && \
+    curl --silent --location https://deb.nodesource.com/setup_4.x | bash - \
+    apt-get install -y nodejs \
     cd /tmp && \
     hg clone https://code.google.com/p/vim/ && \
     cd /tmp/vim && \
