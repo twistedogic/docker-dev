@@ -52,7 +52,7 @@ Plugin 'kchmck/vim-coffee-script'
 
 """ Theme / Pretty stuff
 "
-Plugin 'altercation/vim-colors-solarized'
+  " Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline' "Awesome looking meta at bottom
 Plugin 'majutsushi/tagbar'
 
@@ -94,7 +94,7 @@ filetype on
 syntax enable
 let g:solarized_termcolors=256
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 
 "Allow moving around between Tmux windows
 nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
@@ -170,3 +170,5 @@ function! ToggleCalendar()
     let g:calendar_open = 1
   end
 endfunction
+
+let NERDTreeDirArrows=0
