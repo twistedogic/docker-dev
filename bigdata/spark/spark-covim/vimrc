@@ -192,4 +192,3 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
-map! <C-c> <Esc>
