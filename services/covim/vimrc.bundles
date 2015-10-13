@@ -55,6 +55,8 @@ Plugin 'kchmck/vim-coffee-script'
   " Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline' "Awesome looking meta at bottom
 Plugin 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
+Plugin 'chriskempson/base16-vim'
 
 """ Extras that I find useful
 "
@@ -92,8 +94,11 @@ filetype on
 
 " Color scheme
 syntax enable
+set encoding=utf8
+let base16colorspace=256  " Access colors present in 256 colorspace"
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 set background=dark
-" colorscheme solarized
+colorscheme delek
 
 "Allow moving around between Tmux windows
 nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
