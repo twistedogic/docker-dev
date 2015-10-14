@@ -55,7 +55,6 @@ Plugin 'kchmck/vim-coffee-script'
   " Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline' "Awesome looking meta at bottom
 Plugin 'majutsushi/tagbar'
-Plugin 'majutsushi/tagbar'
 Plugin 'chriskempson/base16-vim'
 
 """ Extras that I find useful
