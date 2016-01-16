@@ -23,7 +23,7 @@ RUN apt-get update \
   && apt-get install -y oracle-java8-installer libc6-dev \
   && apt-get install -y oracle-java8-set-default python2.7 \
   && apt-get clean autoclean \
-  && apt-get --yes
+  && apt-get autoremove --yes \
   && rm -rf /var/cache/oracle-jdk7-installer \
   && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
@@ -56,3 +56,5 @@ RUN (ln -s /opt/${SPARK_TGZ} /opt/spark-$SPARK_VERSION && rm /${SPARK_TGZ}.tgz)
 ADD tmux.conf /root/.tmux.conf
 ADD vimrc /root/.vimrc
 ADD vimrc.bundles /root/.vimrc.bundles
+
+RUN sh ~/vimsetup

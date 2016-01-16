@@ -44,6 +44,7 @@ Plugin 'groenewege/vim-less'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'fatih/vim-go'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'Yggdroot/indentLine'
   " Plugin 'vim-ruby/vim-ruby'
   " Plugin 'tpope/vim-endwise'
 
@@ -176,4 +177,8 @@ function! ToggleCalendar()
   end
 endfunction
 
+" vertical line indentation
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#09AA08'
+let g:indentLine_char = '│'
 let NERDTreeDirArrows=0
