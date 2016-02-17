@@ -58,3 +58,4 @@ ADD vimrc /root/.vimrc
 ADD vimrc.bundles /root/.vimrc.bundles
 
 RUN sh ~/vimsetup
+RUN echo "export PATH=$PATH" > /root/.bashrc
