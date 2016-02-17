@@ -59,3 +59,7 @@ ADD vimrc.bundles /root/.vimrc.bundles
 
 RUN sh ~/vimsetup
 RUN echo "export PATH=$PATH" > /root/.bashrc
+RUN echo "export GOPATH=$GOPATH" >> /root/.bashrc
+RUN echo "export SBT_HOME=$SBT_HOME" >> /root/.bashrc
+RUN echo "export SCALA_HOME=$SCALA_HOME" >> /root/.bashrc
+RUN echo "export SPARK_HOME=$SPARK_HOME" >> /root/.bashrc
