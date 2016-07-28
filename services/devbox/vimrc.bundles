@@ -29,12 +29,10 @@ Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/tComment'
 Plugin 'vim-scripts/HTML-AutoCloseTag'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'tpope/vim-fugitive' "Make git awesome
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 """ Highlighting, syntax, etc for various Languages
 "
-Plugin 'FredKSchott/CoVim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/syntastic' "Syntax Highlighting
 Plugin 'mxw/vim-jsx' "Syntax Highlighting for JSX
@@ -45,14 +43,6 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'fatih/vim-go'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'Yggdroot/indentLine'
-  " Plugin 'vim-ruby/vim-ruby'
-  " Plugin 'tpope/vim-endwise'
-
-
-  " TODO: Fix whatever issue is causing error here
-  " Plugin 'marijnh/tern_for_vim'
-  Plugin 'lfilho/cosco.vim' "Adds a ; at the end of a line by pressing <leader> ;
-
 """ Theme / Pretty stuff
 "
   " Plugin 'altercation/vim-colors-solarized'
@@ -64,28 +54,8 @@ Plugin 'chriskempson/base16-vim'
 "
 Plugin 'pbrisbin/vim-mkdir'
   " Adds :Dash integratio
-Plugin 'rizzatti/dash.vim'
-  " '%' matches html tags now
-Plugin 'vim-scripts/matchit.zip'
-  " Snippets ftw!
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-Plugin 'cmather/vim-meteor-snippets'
-  " Make gists easily from Vim
-Plugin 'mattn/gist-vim'
-Plugin 'mattn/webapi-vim'
-  " I LOVE vimiwki. Just Google it if you are curious :)
-Plugin 'vimwiki/vimwiki'
-Plugin 'mattn/calendar-vim'
-
-" These were required by something...forgot what though
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-
-" Plugins to get sessions to auto-save
-" Plugin 'xolox/vim-session'
-" Plugin 'xolox/vim-misc'
-
 
 call vundle#end()
 filetype on
@@ -112,23 +82,8 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_save_on_switch = 1
 
-"Open a tmux pane with Node
-nnoremap <leader>node :VtrOpenRunner {'orientation': 'h', 'percentage': 50, 'cmd': 'node'}<cr>
-
-" open a dash search for the keyword under cursor
-nmap <silent><leader>d <Plug>DashSearch
-nmap <leader>D :Dash!
-
 map <C-n> :NERDTreeToggle<cr>
 nnoremap <C-t> :call ToggleRelativeOn()<cr>
-
-" mapping for Vimwiki
-:autocmd FileType vimwiki map <leader>c :call ToggleCalendar() <cr>
-set foldmethod=manual
-
-" Key mapping for Cosco.vim - space + ; to add semicolon or comma in Javascript or CSS
-autocmd FileType javascript,css nnoremap <silent> <Leader>; :call cosco#commaOrSemiColon()<CR>
-autocmd FileType javascript,css inoremap <silent> <Leader>; <c-o>:call cosco#commaOrSemiColon()<CR>
 
 " Syntastic won't hilight HTML unless you specify with :SyntasticCheck
 " This is to deal with handlebars issues in meteor
@@ -136,9 +91,6 @@ let syntastic_mode_map = { 'passive_filetypes': ['html']  }
 
 " Allow powerline symbols to show up
 let g:airline_powerline_fonts = 1
-
-" Set Vim Wiki to my Dropbox directory
-let g:vimwiki_list = [{'path':'$HOME/Dropbox/vimwiki'}]
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
@@ -161,21 +113,6 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
-
-" Calender is used within VimWiki
-function! ToggleCalendar()
-  execute ":Calendar"
-  if exists("g:calendar_open")
-    if g:calendar_open == 1
-      execute "q"
-      unlet g:calendar_open
-    else
-      g:calendar_open = 1
-    end
-  else
-    let g:calendar_open = 1
-  end
-endfunction
 
 " vertical line indentation
 let g:indentLine_color_term = 239
