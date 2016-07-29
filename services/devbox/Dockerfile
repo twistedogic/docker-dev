@@ -3,6 +3,7 @@ MAINTAINER Jordan Li
 RUN apt-get update -y && apt-get install -y -q tmux ssh curl ruby vim python python-dev python-pip build-essential git ca-certificates && apt-get clean autoclean && \
     apt-get autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
+RUN mkdir -p /var/run/sshd && chmod 755 /var/run/sshd
 
 ENV GOLANG_VERSION 1.5.2
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
