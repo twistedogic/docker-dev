@@ -16,53 +16,25 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-bundler'
 
 """ Make Vim work like an IDE...Core plugins for me
-"
-Plugin 'tpope/vim-obsession' "Vim sessions auto-save
-" Type :Obession <directory> to begin saving a vim session
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'christoomey/vim-tmux-runner.git'
-Plugin 'christoomey/vim-run-interactive'
-Plugin 'vim-scripts/ctags.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/tComment'
 Plugin 'vim-scripts/HTML-AutoCloseTag'
+Plugin 'majutsushi/tagbar'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 """ Highlighting, syntax, etc for various Languages
-"
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'scrooloose/syntastic' "Syntax Highlighting
-Plugin 'mxw/vim-jsx' "Syntax Highlighting for JSX
-Plugin 'pangloss/vim-javascript' "Requirement for mxw/vim-jsx
-Plugin 'Slava/vim-spacebars'
-Plugin 'groenewege/vim-less'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'fatih/vim-go'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'mxw/vim-jsx' "Syntax Highlighting for JSX
+Plugin 'pangloss/vim-javascript' "Requirement for mxw/vim-jsx
 Plugin 'Yggdroot/indentLine'
 """ Theme / Pretty stuff
-"
-  " Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline' "Awesome looking meta at bottom
-Plugin 'majutsushi/tagbar'
-Plugin 'chriskempson/base16-vim'
-
-""" Extras that I find useful
-"
-Plugin 'pbrisbin/vim-mkdir'
-  " Adds :Dash integratio
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
 
 call vundle#end()
 filetype on
-
-
-""" PLUGIN RELATED TWEAKS
-"
 
 " Color scheme
 syntax enable
@@ -71,6 +43,14 @@ let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 set background=dark
 colorscheme delek
+
+let g:go_disable_autoinstall = 0
+
+let g:go_highlight_functions = 1  
+let g:go_highlight_methods = 1  
+let g:go_highlight_structs = 1  
+let g:go_highlight_operators = 1  
+let g:go_highlight_build_constraints = 1
 
 "Allow moving around between Tmux windows
 nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
@@ -82,12 +62,11 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 let g:tmux_navigator_no_mappings = 1
 let g:tmux_navigator_save_on_switch = 1
 
-map <C-n> :NERDTreeToggle<cr>
+map <C-n> :Sex<cr>
 nnoremap <C-t> :call ToggleRelativeOn()<cr>
-
-" Syntastic won't hilight HTML unless you specify with :SyntasticCheck
-" This is to deal with handlebars issues in meteor
-let syntastic_mode_map = { 'passive_filetypes': ['html']  }
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " Allow powerline symbols to show up
 let g:airline_powerline_fonts = 1
@@ -96,26 +75,7 @@ let g:airline_powerline_fonts = 1
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
-" Index ctags from any project
-map <Leader>ct :!ctags -R .<CR>
-
-" Run commands that require an interactive shell
-nnoremap <Leader>r :RunInInteractiveShell<space>
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
 " vertical line indentation
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#09AA08'
 let g:indentLine_char = '│'
-let NERDTreeDirArrows=0
