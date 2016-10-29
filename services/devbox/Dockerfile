@@ -1,14 +1,15 @@
 FROM google/debian:jessie
 MAINTAINER Jordan Li
-RUN apt-get update -y && apt-get install -y -q silversearcher-ag tmux ssh curl ruby vim python python-dev python-pip build-essential git ca-certificates && apt-get clean autoclean && \
+RUN apt-get update -y && apt-get install -y -q silversearcher-ag tmux ssh curl
+ruby vim python libelf1 python-dev python-pip build-essential git ca-certificates && apt-get clean autoclean && \
     apt-get autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 RUN mkdir -p /var/run/sshd && chmod 755 /var/run/sshd
 
-ENV GOLANG_VERSION 1.5.2
+ENV GOLANG_VERSION 1.7.3
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 ENV GOPATH /go
-ENV NODE_VERSION v6.3.1
+ENV NODE_VERSION v6.9.1
 ENV NODE_DOWNLOAD_URL https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.xz
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
@@ -27,6 +28,8 @@ ADD vimrc /root/.vimrc
 ADD vimrc.bundles /root/.vimrc.bundles
 RUN git clone https://github.com/VundleVim/Vundle.vim.git /root/.vim/bundle/Vundle.vim
 RUN vim +PluginInstall +qall
+
+RUN npm install -g yarn
 
 EXPOSE 22
 CMD /usr/sbin/sshd -D
