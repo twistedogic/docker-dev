@@ -1,7 +1,10 @@
 FROM google/debian:jessie
 MAINTAINER Jordan Li
-RUN apt-get update -y && apt-get install -y -q silversearcher-ag tmux ssh curl
-ruby vim python libelf1 python-dev python-pip build-essential git ca-certificates && apt-get clean autoclean && \
+RUN apt-get update -y && \
+    apt-get install -y -q silversearcher-ag tmux ssh curl vim \
+    ruby python libelf1 python-dev python-pip \
+    build-essential git ca-certificates && \
+    apt-get clean autoclean && \
     apt-get autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 RUN mkdir -p /var/run/sshd && chmod 755 /var/run/sshd
