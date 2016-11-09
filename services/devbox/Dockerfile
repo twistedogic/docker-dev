@@ -2,7 +2,7 @@ FROM google/debian:jessie
 MAINTAINER Jordan Li
 RUN apt-get update -y && \
     apt-get install -y -q silversearcher-ag tmux ssh curl vim \
-    ruby python libelf1 python-dev python-pip \
+    ruby python libelf1 libfontconfig python-dev python-pip \
     build-essential git ca-certificates && \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
