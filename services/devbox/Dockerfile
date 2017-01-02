@@ -4,6 +4,7 @@ RUN apt-get update -y && \
     apt-get install -y -q silversearcher-ag tmux ssh curl vim \
     ruby python libelf1 libfontconfig python-dev python-pip \
     build-essential git ca-certificates && \
+    gdb ltrace strace && \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
@@ -32,7 +33,11 @@ ADD vimrc.bundles /root/.vimrc.bundles
 RUN git clone https://github.com/VundleVim/Vundle.vim.git /root/.vim/bundle/Vundle.vim
 RUN vim +PluginInstall +qall
 
-RUN npm install -g yarn
+RUN git clone https://github.com/radare/radare2 /opt/radare2 && \
+    cd /opt/radare2 && \
+    ./sys/install.sh && make symstall
+
+RUN npm install -g yarn how2
 
 EXPOSE 22
 CMD /usr/sbin/sshd -D
