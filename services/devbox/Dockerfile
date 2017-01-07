@@ -3,7 +3,7 @@ MAINTAINER Jordan Li
 RUN apt-get update -y && \
     apt-get install -y -q silversearcher-ag tmux ssh curl vim \
     ruby python libelf1 libfontconfig python-dev python-pip \
-    build-essential git ca-certificates && \
+    build-essential git ca-certificates \
     gdb ltrace strace && \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
