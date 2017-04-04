@@ -18,9 +18,5 @@ ADD vimrc.bundles /root/.vimrc.bundles
 RUN git clone https://github.com/VundleVim/Vundle.vim.git /root/.vim/bundle/Vundle.vim
 RUN vim +PluginInstall +qall
 
-RUN git clone https://github.com/radare/radare2 /opt/radare2 && \
-    cd /opt/radare2 && \
-    ./sys/install.sh && make symstall
-
 EXPOSE 22
 CMD /usr/sbin/sshd -D
