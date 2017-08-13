@@ -12,9 +12,8 @@ RUN mkdir -p /var/run/sshd && chmod 755 /var/run/sshd
 
 RUN echo "export PATH=$PATH" > /root/.bashrc
 
-ADD tmux.conf /root/.tmux.conf
-ADD vimrc /root/.vimrc
-ADD vimrc.bundles /root/.vimrc.bundles
+ADD setup /root/.setup
+RUN /root/.setup
 RUN git clone https://github.com/VundleVim/Vundle.vim.git /root/.vim/bundle/Vundle.vim
 RUN vim +PluginInstall +qall
 

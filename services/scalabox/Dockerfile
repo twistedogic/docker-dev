@@ -26,15 +26,14 @@ ENV SBT_HOME /usr/local/sbt
 ENV PATH ${PATH}:${SBT_HOME}/bin
 
 # Install sbt
-RUN curl -sL "http://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SBT_VERSION.tgz" | gunzip | tar -x -C /usr/local && \
-    echo -ne "- with sbt $SBT_VERSION\n" >> /root/.built
+RUN curl -sL "http://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SBT_VERSION.tgz" | gunzip | tar -x -C /usr/local
 
-ENV SCALA_HOME /usr/local/share/scala
-ENV PATH $PATH:$SCALA_HOME/bin
-
+ENV SCALA_HOME /usr/local/scala
 ENV SCALA_VERSION 2.12.1
 
-RUN wget --quiet http://downloads.lightbend.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz && \
-    tar -xf scala-$SCALA_VERSION.tgz && \
-    rm scala-$SCALA_VERSION.tgz && \
-    mv scala-$SCALA_VERSION $SCALA_HOME
+RUN java -version 2>&1 | grep version | sed -e 's/^openjdk version /JAVA_VERSION=/' > $JAVA_HOME/release
+
+RUN curl -sL "http://downloads.lightbend.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz" | gunzip | tar -x -C /tmp && \
+mv /tmp/scala-$SCALA_VERSION $SCALA_HOME
+
+RUN echo "export PATH=${PATH}:${SBT_HOME}/bin:${SCALA_HOME}/bin" >> ~/.bashrc
