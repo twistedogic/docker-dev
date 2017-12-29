@@ -1,7 +1,7 @@
 FROM twistedogic/devbox:latest
 MAINTAINER Jordan Li
 
-ENV GOLANG_VERSION 1.7.3
+ENV GOLANG_VERSION 1.9.2
 ENV GOLANG_DOWNLOAD_URL https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz
 ENV GOPATH /go
 

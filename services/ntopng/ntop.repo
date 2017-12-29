@@ -1,7 +1,0 @@
-[ntop]
-name=ntop packages
-baseurl=http://www.nmon.net/centos/$releasever/$basearch/
-enabled=1
-gpgcheck=1
-gpgkey=http://www.nmon.net/centos-stable/RPM-GPG-KEY-deri
-

@@ -1,2 +1,0 @@
-TIME_ZONE = 'UTC'
-DEBUG = False

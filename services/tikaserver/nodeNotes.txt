@@ -1,2 +1,0 @@
-npm install java
-npm install tika
