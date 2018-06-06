@@ -1,0 +1,44 @@
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-sensible'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-surround'
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'Yggdroot/indentLine'
+Plug 'bling/vim-airline'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ervandew/supertab'
+Plug 'jiangmiao/auto-pairs'
+call plug#end()
+
+filetype on
+
+" Color scheme
+syntax enable
+set encoding=utf8
+let base16colorspace=256  " Access colors present in 256 colorspace"
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
+set background=dark
+colorscheme delek
+
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ }
+
+"Allow moving around between Tmux windows
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+
+"tmux integration
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 1
+
+map <C-n> :Sex<cr>
+set number
+
+"hyper.js fix
+set t_RV=
