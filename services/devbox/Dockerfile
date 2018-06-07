@@ -8,13 +8,14 @@ ENV LC_ALL en_US.UTF-8
 RUN apt-get update -y && \
     apt-get install -y -q tmux curl vim-nox \
     ruby python libelf1 libfontconfig python-dev python-pip \
-    build-essential cmake git ca-certificates \
+    build-essential cmake git ca-certificates locales \
     gdb ltrace strace && \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 RUN echo "export PATH=$PATH" > /root/.bashrc
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 
 ADD setup /root/.setup
 RUN /root/.setup
