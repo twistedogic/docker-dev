@@ -16,6 +16,7 @@ RUN apt-get update -y && \
 
 RUN echo "export PATH=$PATH" > /root/.bashrc
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
 
 ADD setup /root/.setup
 RUN /root/.setup
