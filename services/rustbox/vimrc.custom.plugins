@@ -1,0 +1,3 @@
+Plug 'rust-lang/rust.vim'
+Plug 'vim-syntastic/syntastic'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer' }

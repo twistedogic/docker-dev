@@ -1,14 +1,7 @@
 FROM twistedogic/devbox:latest
 MAINTAINER Jordan Li
 
-ENV NODE_VERSION v8.11.1
-ENV NODE_DOWNLOAD_URL https://nodejs.org/dist/$NODE_VERSION/node-$NODE_VERSION-linux-x64.tar.xz
-
-RUN curl -SLO "$NODE_DOWNLOAD_URL" \ 
-  && tar xf node-$NODE_VERSION-linux-x64.tar.xz -C /usr/local --strip-components=1 \
-  && rm node-$NODE_VERSION-linux-x64.tar.xz
-
-RUN npm install -g typescript create-react-app prettier
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 ADD vimrc.custom /root/.vimrc.custom
 ADD vimrc.custom.plugins /root/.vimrc.custom.plugins
