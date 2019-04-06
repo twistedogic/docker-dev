@@ -1,0 +1,3 @@
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
