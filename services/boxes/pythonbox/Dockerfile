@@ -11,5 +11,6 @@ COPY --from=builder /root/.setup /root/.setup
 RUN /root/.setup
 
 RUN vim +PlugInstall +qall
+WORKDIR /root/workspace/
 
 EXPOSE 3000 8080
