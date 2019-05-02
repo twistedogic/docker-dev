@@ -12,4 +12,7 @@ RUN sed -i '$ d' /root/.vimrc.plugins && \
   rm -rf /root/.vimrc.custom.plugins
 
 RUN vim +PlugInstall +qall
+RUN echo "PATH=/usr/local/cargo/bin:$PATH" >> $HOME/.bashrc
+WORKDIR /root/workspace/
+
 EXPOSE 3000 8080

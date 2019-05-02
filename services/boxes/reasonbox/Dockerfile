@@ -14,5 +14,6 @@ RUN sed -i '$ d' /root/.vimrc.plugins && \
   rm -rf /root/.vimrc.custom.plugins
 
 RUN vim +PlugInstall +qall
+WORKDIR /root/workspace/
 
 EXPOSE 3000 8080

@@ -13,5 +13,6 @@ RUN sed -i '$ d' /root/.vimrc.plugins && \
   cat /root/.vimrc.custom.plugins >> /root/.vimrc.plugins && \ 
   echo "\ncall plug#end()" >> /root/.vimrc.plugins && \
   rm -rf /root/.vimrc.custom.plugins
+WORKDIR /root/workspace/
 
 RUN vim +PlugInstall +qall
