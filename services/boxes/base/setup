@@ -7,6 +7,10 @@ apt-get clean autoclean && \
 apt-get autoremove --yes && \
 rm -rf /var/lib/{apt,dpkg,cache,log}/
 
+mkdir -p /var/lib/dpkg 
+mkdir -p /var/lib/dpkg/{info,updates}
+touch /var/lib/dpkg/status
+
 rm ~/.bashrc
 git clone --bare https://github.com/twistedogic/dotfiles.git $HOME/.cfg
 function config {
