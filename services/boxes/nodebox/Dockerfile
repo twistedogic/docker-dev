@@ -1,6 +1,6 @@
 FROM devbox:latest AS builder
 
-FROM node:slim
+FROM node:buster
 MAINTAINER Jordan Li
 
 RUN npm install -g create-react-app gatsby-cli

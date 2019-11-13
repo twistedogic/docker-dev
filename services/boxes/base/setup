@@ -1,15 +1,12 @@
 #!/bin/bash
-apt-get update -y && \
+apt-get update -y 
 apt-get install -y -q tmux curl vim-nox git locales \
-build-essential cmake \
-ca-certificates net-tools && \
-apt-get clean autoclean && \
-apt-get autoremove --yes && \
-rm -rf /var/lib/{apt,dpkg,cache,log}/
-
-mkdir -p /var/lib/dpkg 
-mkdir -p /var/lib/dpkg/{info,updates}
-touch /var/lib/dpkg/status
+  build-essential cmake \
+  ca-certificates net-tools 
+apt-get clean autoclean 
+apt-get autoremove --yes 
+rm -rf /var/lib/{cache,log}/
+rm -rf /var/lib/apt/lists/*
 
 rm ~/.bashrc
 git clone --bare https://github.com/twistedogic/dotfiles.git $HOME/.cfg
