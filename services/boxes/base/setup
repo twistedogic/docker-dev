@@ -1,12 +1,12 @@
 #!/bin/bash
-apt-get update -y 
-apt-get install -y -q tmux curl vim-nox git locales \
-  build-essential cmake \
-  ca-certificates net-tools 
-apt-get clean autoclean 
-apt-get autoremove --yes 
-rm -rf /var/lib/{cache,log}/
-rm -rf /var/lib/apt/lists/*
+# apt-get update -y 
+# apt-get install -y -q tmux curl vim-nox git locales \
+#  build-essential cmake \
+#  ca-certificates net-tools 
+#apt-get clean autoclean 
+#apt-get autoremove --yes 
+#rm -rf /var/lib/{cache,log}/
+#rm -rf /var/lib/apt/lists/*
 
 rm ~/.bashrc
 git clone --bare https://github.com/twistedogic/dotfiles.git $HOME/.cfg
@@ -25,4 +25,3 @@ config checkout
 config config status.showUntrackedFiles no
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen

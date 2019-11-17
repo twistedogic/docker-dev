@@ -4,9 +4,11 @@ FROM golang:1.12-stretch
 MAINTAINER Jordan Li
 
 COPY --from=builder /root/.setup /root/.setup
+COPY --from=builder /opt /opt
+
 RUN /root/.setup
 ADD vimrc.custom /root/.vimrc.plugins
-
+ENV PATH=/opt/bin:$PATH
 RUN vim +PlugInstall +qall
 
 RUN echo "PATH=/usr/local/go/bin:/go/bin:$PATH" >> $HOME/.bashrc
