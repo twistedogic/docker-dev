@@ -3,7 +3,10 @@ FROM devbox:latest as builder
 FROM elixir:slim
 MAINTAINER Jordan Li
 
+ENV PATH=/opt/bin:$PATH
 COPY --from=builder /root/.setup /root/.setup
+COPY --from=builder /opt /opt
+
 RUN /root/.setup
 ADD vimrc.custom.plugins /root/.vimrc.custom.plugins
 RUN sed -i '$ d' /root/.vimrc.plugins && \

@@ -3,15 +3,15 @@ FROM devbox:latest AS builder
 FROM golang:1.12-stretch
 MAINTAINER Jordan Li
 
+ENV PATH=/opt/bin:$PATH
 COPY --from=builder /root/.setup /root/.setup
 COPY --from=builder /opt /opt
 
 RUN /root/.setup
 ADD vimrc.custom /root/.vimrc.plugins
-ENV PATH=/opt/bin:$PATH
 RUN vim +PlugInstall +qall
 
-RUN echo "PATH=/usr/local/go/bin:/go/bin:$PATH" >> $HOME/.bashrc
+RUN echo "export PATH=/usr/local/go/bin:/go/bin:$PATH" >> $HOME/.bashrc
 
 RUN go get github.com/klauspost/asmfmt/cmd/asmfmt && \
     go get github.com/go-delve/delve/cmd/dlv && \
