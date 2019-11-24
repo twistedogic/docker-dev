@@ -11,7 +11,7 @@ RUN /root/.setup
 
 RUN vim +PlugInstall +qall
 
-ENTRYPOINT /usr/bin/tmux
+ENTRYPOINT /opt/bin/tmux
 WORKDIR /root/workspace/
 
 EXPOSE 3000 8080
