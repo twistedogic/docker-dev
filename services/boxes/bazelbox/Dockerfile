@@ -1,15 +1,24 @@
-FROM devbox:latest AS builder
+ARG BAZEL_VERSION=1.2.1
+ARG BASE_IMAGE=l.gcr.io/google/bazel:${BAZEL_VERSION}
 
-FROM l.gcr.io/google/bazel:latest
+FROM devbox:latest AS builder
+FROM $BASE_IMAGE
 MAINTAINER Jordan Li
 
-ENV PATH=/opt/bin:$PATH
+ARG GOLANG_VERSION=1.13.5
+
 COPY --from=builder /root/.setup /root/.setup
 COPY --from=builder /opt /opt
+ADD vimrc.custom /root/.vimrc.plugins
 
-RUN /root/.setup
+ADD https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz /tmp/go.tgz
+RUN tar -C /usr/local -xzf /tmp/go.tgz && rm /tmp/go.tgz
 
-RUN vim +PlugInstall +qall
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:/opt/bin:$PATH
+RUN go version
+
+RUN /root/.setup && vim +PlugInstall +qall
 
 ENTRYPOINT /opt/bin/tmux
 WORKDIR /root/workspace/
