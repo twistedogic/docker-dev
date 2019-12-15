@@ -1,28 +1,26 @@
 #!/bin/bash
-apt-get update -y 
-apt-get install -y -q tmux curl vim-nox git locales \
-  build-essential cmake \
-  ca-certificates net-tools 
-apt-get clean autoclean 
-apt-get autoremove --yes 
-rm -rf /var/lib/{cache,log}/
-rm -rf /var/lib/apt/lists/*
-
-rm ~/.bashrc
-git clone --bare https://github.com/twistedogic/dotfiles.git $HOME/.cfg
-function config {
-  /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@
+GIT_DIR=$HOME/.cfg
+DOTFILE_DIR=$HOME/.dotfiles
+rm -rf $GIT_DIR
+mkdir -p $DOTFILE_DIR
+install_git_curl() {
+    apt-get update -y
+    apt-get --no-install-recommends install -y -q git curl ca-certificates
+    apt-get clean
+    apt-get autoclean
+    rm /var/lib/apt/lists/*
 }
-mkdir -p ${HOME}/.config-backup
+if ! [ -x "$(command -v git)" ]; then
+    install_git_curl
+fi
+git clone --bare https://github.com/twistedogic/dotfiles.git $GIT_DIR
+function config {
+  /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$DOTFILE_DIR $@
+}
 config checkout
-if [ $? = 0  ]; then
-  echo "Checked out config.";
-else
-  echo "Backing up pre-existing dot files.";
-  config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} ${HOME}/.config-backup/{}
-fi;
-config checkout
-config config status.showUntrackedFiles no
+cp -a $DOTFILE_DIR/. $HOME
 
+if ! [ -x "$(command -v curl)" ]; then
+    install_git_curl
+fi
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen

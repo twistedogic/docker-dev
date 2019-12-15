@@ -9,7 +9,8 @@ RUN apt-get update -y && \
     apt-get autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
 
+ENV PATH=/opt/bin:$PATH
 COPY --from=builder /root/.setup /root/.setup
+COPY --from=builder /opt /opt
 RUN /root/.setup
-
 RUN vim +PlugInstall +qall

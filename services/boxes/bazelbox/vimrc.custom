@@ -10,4 +10,5 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode'
+Plug 'bfrg/vim-cpp-modern'
 call plug#end()

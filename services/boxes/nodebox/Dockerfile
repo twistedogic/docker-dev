@@ -1,11 +1,14 @@
 FROM devbox:latest AS builder
 
-FROM node:buster
+FROM node:10-buster
 MAINTAINER Jordan Li
 
 RUN npm install -g create-react-app gatsby-cli
 
+ENV PATH=/opt/bin:$PATH
 COPY --from=builder /root/.setup /root/.setup
+COPY --from=builder /opt /opt
+
 RUN /root/.setup
 ADD vimrc.custom /root/.vimrc.custom
 ADD vimrc.custom.plugins /root/.vimrc.custom.plugins

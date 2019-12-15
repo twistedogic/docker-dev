@@ -3,11 +3,10 @@ FROM devbox:latest as builder
 FROM python:3.7-slim
 MAINTAINER Jordan Li
 
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8  
-
+ENV LC_ALL C.UTF-8  
+ENV PATH=/opt/bin:$PATH
 COPY --from=builder /root/.setup /root/.setup
+COPY --from=builder /opt /opt
 RUN /root/.setup
 
 RUN vim +PlugInstall +qall
