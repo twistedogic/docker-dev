@@ -1,0 +1,9 @@
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'burner/vim-svelte'
+Plug 'prettier/vim-prettier', {
+    \ 'do': 'npm install',
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
+Plug 'rust-lang/rust.vim' 
+Plug 'vim-syntastic/syntastic'
