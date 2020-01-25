@@ -7,7 +7,6 @@ Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
-
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode'
 Plug 'bfrg/vim-cpp-modern'
