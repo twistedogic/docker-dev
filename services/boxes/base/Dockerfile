@@ -55,3 +55,6 @@ RUN cd ${BUILD_DIR}/vim-${VIM_VERSION} && \
     --prefix=${TARGET_DIR} && \
   make && make install
 
+ADD https://github.com/exercism/cli/releases/download/v3.0.13/exercism-linux-64bit.tgz /tmp/exercism-linux-64bit.tgz
+RUN tar -C ${TARGET_DIR}/bin -xf /tmp/exercism-linux-64bit.tgz 
+
