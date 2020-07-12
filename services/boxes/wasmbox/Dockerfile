@@ -9,6 +9,7 @@ COPY --from=builder /root/.setup /root/.setup
 COPY --from=builder /opt /opt
 COPY --from=nodebase /usr/local /usr/local
 RUN /root/.setup
+ADD vimrc.custom /root/.vimrc.custom
 ADD vimrc.custom.plugins /root/.vimrc.custom.plugins
 RUN sed -i '$ d' /root/.vimrc.plugins && \
   cat /root/.vimrc.custom.plugins >> /root/.vimrc.plugins && \ 
@@ -18,6 +19,7 @@ RUN sed -i '$ d' /root/.vimrc.plugins && \
 RUN vim +PlugInstall +qall
 RUN curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 RUN echo "PATH=/usr/local/cargo/bin:$PATH" >> $HOME/.bashrc
+RUN rustup component add rustfmt
 WORKDIR /root/workspace/
 
 EXPOSE 3000 8080
