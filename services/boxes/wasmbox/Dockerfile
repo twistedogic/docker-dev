@@ -8,6 +8,9 @@ ENV PATH=/opt/bin:$PATH
 COPY --from=builder /root/.setup /root/.setup
 COPY --from=builder /opt /opt
 COPY --from=nodebase /usr/local /usr/local
+ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /tmp/google-chrome-stable_current_amd64.deb
+RUN apt-get update -y
+RUN dpkg -i /tmp/google-chrome-stable_current_amd64.deb || true && apt-get -fy install
 RUN /root/.setup
 ADD vimrc.custom /root/.vimrc.custom
 ADD vimrc.custom.plugins /root/.vimrc.custom.plugins
