@@ -1,13 +1,1 @@
-call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-sensible'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-surround'
-Plug 'Yggdroot/indentLine'
-Plug 'bling/vim-airline'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'nsf/gocode'
-Plug 'bfrg/vim-cpp-modern'
-call plug#end()
+let g:go_gopls_enabled = 0

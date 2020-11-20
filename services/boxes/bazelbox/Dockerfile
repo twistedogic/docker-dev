@@ -1,4 +1,4 @@
-ARG BAZEL_VERSION=1.2.1
+ARG BAZEL_VERSION=3.5.0
 ARG BASE_IMAGE=l.gcr.io/google/bazel:${BAZEL_VERSION}
 
 FROM devbox:latest AS builder
@@ -18,7 +18,12 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:/opt/bin:$PATH
 RUN go version
 
 RUN /root/.setup 
-ADD vimrc.custom /root/.vimrc.plugins
+ADD vimrc.custom /root/.vimrc.custom
+ADD vimrc.custom.plugins /root/.vimrc.custom.plugins
+RUN sed -i '$ d' /root/.vimrc.plugins && \
+  cat /root/.vimrc.custom.plugins >> /root/.vimrc.plugins && \ 
+  echo "\ncall plug#end()" >> /root/.vimrc.plugins && \
+  rm -rf /root/.vimrc.custom.plugins
 RUN vim +PlugInstall +qall
 
 ENTRYPOINT /opt/bin/tmux
