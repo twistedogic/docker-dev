@@ -10,7 +10,9 @@ COPY --from=builder /opt /opt
 COPY --from=nodebase /usr/local /usr/local
 ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /tmp/google-chrome-stable_current_amd64.deb
 RUN apt-get update -y
-RUN dpkg -i /tmp/google-chrome-stable_current_amd64.deb || true && apt-get -fy install
+RUN dpkg -i /tmp/google-chrome-stable_current_amd64.deb || true && \
+    apt-get -fy install && \
+    rm /tmp/google-chrome-stable_current_amd64.deb
 RUN /root/.setup
 ADD vimrc.custom /root/.vimrc.custom
 ADD vimrc.custom.plugins /root/.vimrc.custom.plugins

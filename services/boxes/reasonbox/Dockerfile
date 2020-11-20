@@ -3,7 +3,7 @@ FROM devbox:latest as builder
 FROM nodebox:latest
 MAINTAINER Jordan Li <twistedogic@gmail.com>
 
-RUN npm install -g yarn
+RUN npm install -g yarn || true
 RUN yarn global add bs-platform reason-cli@3.1.0-linux ocaml-language-server create-react-app reason-scripts
 
 ADD vimrc.custom /root/.vimrc.custom
